@@ -8,7 +8,7 @@ export type CreateTodoDto = components['schemas']['CreateToDoDto']
 export async function getTodoList(signal: AbortSignal) {
   const httpClient = getHttpClient(PROTECTED_RESOURCES.toDoListAPI.scopes.read, { signal })
 
-  const { data, error } = await httpClient.GET('/api/ToDoList')
+  const { data, error } = await httpClient.GET('/api/todolist')
 
   if (data === undefined) {
     throw new Error(error)
@@ -20,7 +20,7 @@ export async function getTodoList(signal: AbortSignal) {
 export async function getTodo(todoId: number, signal: AbortSignal) {
   const httpClient = getHttpClient(PROTECTED_RESOURCES.toDoListAPI.scopes.read, { signal })
 
-  const { data, error } = await httpClient.GET('/api/ToDoList/{id}', {
+  const { data, error } = await httpClient.GET('/api/todolist/{id}', {
     params: { path: { id: todoId } },
   })
 
@@ -34,7 +34,7 @@ export async function getTodo(todoId: number, signal: AbortSignal) {
 export async function addTodo(todo: CreateTodoDto) {
   const httpClient = getHttpClient(PROTECTED_RESOURCES.toDoListAPI.scopes.write, {})
 
-  const { data, error } = await httpClient.POST('/api/ToDoList', { body: todo })
+  const { data, error } = await httpClient.POST('/api/todolist', { body: todo })
 
   if (data === undefined) {
     throw new Error(error)
@@ -46,7 +46,7 @@ export async function addTodo(todo: CreateTodoDto) {
 export async function editTodo(todo: Todo) {
   const httpClient = getHttpClient(PROTECTED_RESOURCES.toDoListAPI.scopes.write, {})
 
-  const { data, error } = await httpClient.PUT('/api/ToDoList/{id}', {
+  const { data, error } = await httpClient.PUT('/api/todolist/{id}', {
     body: todo,
     params: { path: { id: todo.id } },
   })
@@ -61,7 +61,7 @@ export async function editTodo(todo: Todo) {
 export async function deleteTodo(todoId: number) {
   const httpClient = getHttpClient(PROTECTED_RESOURCES.toDoListAPI.scopes.write, {})
 
-  const { data } = await httpClient.DELETE('/api/ToDoList/{id}', {
+  const { data } = await httpClient.DELETE('/api/todolist/{id}', {
     params: { path: { id: todoId } },
   })
 
