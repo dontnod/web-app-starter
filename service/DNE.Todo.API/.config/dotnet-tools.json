@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "dotswashbuckle.aspnetcore.cli": {
+      "version": "3.0.8",
+      "commands": [
+        "swagger"
+      ]
+    }
+  }
+}
