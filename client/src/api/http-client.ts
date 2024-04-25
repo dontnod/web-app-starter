@@ -2,6 +2,7 @@ import { paths } from './todo-schema'
 import createClient, { ClientOptions, Middleware } from 'openapi-fetch'
 import { IPublicClientApplication } from '@azure/msal-browser'
 import { msalInstance } from '@/main'
+import { CONFIG } from '@/config/config'
 
 export const getAuthMiddleware = (
   instance: IPublicClientApplication,
@@ -18,7 +19,7 @@ export const getAuthMiddleware = (
 
 export const getHttpClient = (scopes: string[] = [], clientOptions?: ClientOptions) => {
   const client = createClient<paths>({
-    baseUrl: import.meta.env.VITE_ENDPOINT_URL,
+    baseUrl: CONFIG.todoApi.endpoint,
     ...clientOptions,
   })
 
