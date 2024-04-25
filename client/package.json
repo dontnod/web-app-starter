@@ -49,5 +49,6 @@
     "typescript": "^5.4.5",
     "vite": "^5.2.0",
     "vite-plugin-checker": "^0.6.4"
-  }
+  },
+  "packageManager": "yarn@4.1.1"
 }

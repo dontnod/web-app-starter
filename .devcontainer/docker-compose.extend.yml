@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: dev-image
       args:
         - DOTNET_BUILDER_IMAGE=8.0
         - DOTNET_IMAGE_FROM=mcr.microsoft.com/devcontainers/dotnet

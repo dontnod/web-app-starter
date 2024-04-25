@@ -4,7 +4,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: prod-image
+      args:
+        - VITE_AZURE_CLIENT_ID=${VITE_AZURE_CLIENT_ID}
+        - VITE_AZURE_AUTHORITY=${VITE_AZURE_AUTHORITY}
+        - VITE_TODO_API_ENDPOINT_URL=${VITE_TODO_API_ENDPOINT_URL}
+        - VITE_TODO_API_SCOPES_READ=${VITE_TODO_API_SCOPES_READ}
+        - VITE_TODO_API_SCOPES_WRITE=${VITE_TODO_API_SCOPES_WRITE}
+    image: application:latest
     hostname: application
     restart: always
-volumes:
-  db-data: {}
+    environment:
+      AzureAd__ClientId: $AZURE_CLIENT_ID
+      AzureAd__TenantId: $AZURE_TENANT_ID
+    ports:
+      - "127.0.0.1:8080:8080"
