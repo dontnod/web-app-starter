@@ -61,6 +61,7 @@ export const PROTECTED_RESOURCES = {
   toDoListAPI: {
     endpoint: 'http://localhost:5197/api/todolist',
     scopes: {
+      // TODO: move to the config
       read: ['api://c06a77ec-b4db-4866-9785-a546fc99ade0/ToDoList.Read'], //: ['api://Enter_the_Web_Api_Application_Id_Here/ToDoList.Read'],
       write: ['api://c06a77ec-b4db-4866-9785-a546fc99ade0/ToDoList.ReadWrite'], //['api://Enter_the_Web_Api_Application_Id_Here/ToDoList.ReadWrite'],
     },

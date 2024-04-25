@@ -1,15 +1,16 @@
+import { RouterType } from '@/App'
 import { NavigationClient, NavigationOptions } from '@azure/msal-browser'
-import { UseNavigateResult } from '@tanstack/react-router'
+import { Router } from '@tanstack/react-router'
 
 /**
  * This is an example for overriding the default function MSAL uses to navigate to other urls in your webpage
  */
 export class MsalNavigationClient extends NavigationClient {
-  private navigate: UseNavigateResult<string>
+  private readonly router: RouterType
 
-  constructor(navigate: UseNavigateResult<string>) {
+  constructor(router: Router) {
     super()
-    this.navigate = navigate
+    this.router = router
   }
 
   /**
@@ -20,10 +21,12 @@ export class MsalNavigationClient extends NavigationClient {
    */
   async navigateInternal(url: string, options: NavigationOptions) {
     const relativePath = url.replace(window.location.origin, '')
+
+    this.router.state.location.href = relativePath
     if (options.noHistory) {
-      this.navigate({ replace: true, to: relativePath })
+      this.router.navigate({ replace: true, to: relativePath })
     } else {
-      this.navigate({ to: relativePath })
+      this.router.navigate({ to: relativePath })
     }
 
     return false

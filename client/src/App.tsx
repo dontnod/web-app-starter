@@ -1,20 +1,24 @@
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '@/api/query-client'
-
-// Import the generated route tree
 import { routeTree } from './routeTree.gen'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { IPublicClientApplication } from '@azure/msal-browser'
-import { MsalNavigationClient } from '@/utils/msal-navigation-client'
+import { EventMessageUtils, IPublicClientApplication, InteractionStatus } from '@azure/msal-browser'
 import { MsalProvider } from '@azure/msal-react'
+import { useEffect } from 'react'
+import { BehaviorSubject } from 'rxjs'
 
 // Create a new router instance
 const router = createRouter({
   routeTree,
   context: {
     queryClient,
+    // Will be initialized inside the `App` function
+    msalInstance: null!,
+    isMsalReady: new BehaviorSubject(false),
   },
 })
+
+export type RouterType = typeof router
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
@@ -28,10 +32,24 @@ export interface AppProps {
 }
 
 export function App({ msalInstance }: AppProps) {
-  // The next 2 lines are optional.
-  // This is how you configure MSAL to take advantage of the router's navigate functions when MSAL redirects between pages in your app
-  const navigationClient = new MsalNavigationClient(router.navigate)
-  msalInstance.setNavigationClient(navigationClient)
+  // Attach the msalInstance to the router context
+  router.options.context.msalInstance = msalInstance
+
+  useEffect(() => {
+    // Emit a value when the MSAL is ready, this is particularly useful for the authentication guard to work
+    const callbackId = msalInstance.addEventCallback((message) => {
+      const status = EventMessageUtils.getInteractionStatusFromEvent(message)
+      if (status === InteractionStatus.None) {
+        // Cast the observable in order to emit the value (but hide the implementation for the consumers)
+        const isMsalReady = router.options.context.isMsalReady as BehaviorSubject<boolean>
+        isMsalReady.next(true)
+      }
+    })
+
+    return () => {
+      callbackId && msalInstance.removeEventCallback(callbackId)
+    }
+  }, [msalInstance])
 
   return (
     <MsalProvider instance={msalInstance}>
@@ -40,8 +58,4 @@ export function App({ msalInstance }: AppProps) {
       </QueryClientProvider>
     </MsalProvider>
   )
-}
-
-export interface InnerAppProps {
-  pca: IPublicClientApplication
 }

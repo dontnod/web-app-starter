@@ -22,5 +22,7 @@
             "source.fixAll": "explicit"
         }
     },
-    "cSpell.words": []
+    "cSpell.words": [
+        "Msal"
+    ]
 }

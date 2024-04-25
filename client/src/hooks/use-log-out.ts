@@ -4,7 +4,7 @@ export function useLogoutPopup() {
   const { instance } = useMsal()
 
   return async () =>
-    instance.logoutPopup({
+    await instance.logoutPopup({
       mainWindowRedirectUri: '/', // redirects the top level app after logout
       account: instance.getActiveAccount(),
     })
@@ -16,5 +16,6 @@ export function useLogoutRedirect() {
   return async () =>
     await instance.logoutRedirect({
       account: instance.getActiveAccount(),
+      postLogoutRedirectUri: '/',
     })
 }

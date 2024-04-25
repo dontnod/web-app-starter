@@ -1,19 +1,26 @@
 import { App as AntdApp, Breadcrumb, Layout } from 'antd'
 import { QueryClient } from '@tanstack/react-query'
-import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
+import { Outlet, createRootRouteWithContext, useRouter } from '@tanstack/react-router'
 import { createStyles } from 'antd-style'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { NavigationBar } from '@/components'
 import { useBreadcrumbs } from '@/hooks/use-breadcrumbs'
+import { IPublicClientApplication } from '@azure/msal-browser'
+import { Observable } from 'rxjs'
+import { useMsal } from '@azure/msal-react'
+import { MsalNavigationClient } from '@/utils/msal-navigation-client'
+import { useEffect } from 'react'
 
 export interface AppRouterContext {
   queryClient: QueryClient
+  msalInstance: IPublicClientApplication
+  isMsalReady: Observable<boolean>
 }
 
 export const Route = createRootRouteWithContext<AppRouterContext>()({
   component: RootComponent,
   beforeLoad: () => ({
-    getTitle: () => 'Sample Web App',
+    getTitle: () => 'Web App Starter',
   }),
 })
 
@@ -50,7 +57,18 @@ const useStyles = createStyles(({ token }) => ({
 
 function RootComponent() {
   const { styles } = useStyles()
+  const { instance } = useMsal()
+  const router = useRouter()
   const breadcrumbs = useBreadcrumbs()
+
+  useEffect(() => {
+    // Configuring the navigation client in order to bind MSAL to the app router
+    // This allows MSAL to redirect to the asked route after a login
+    // Note: this has to be under the `<RouterProvider router={router} />`
+    // in order for navigation to work
+    const navigationClient = new MsalNavigationClient(router)
+    instance.setNavigationClient(navigationClient)
+  }, [router, instance])
 
   return (
     <AntdApp className={styles.app}>
@@ -63,7 +81,7 @@ function RootComponent() {
           </div>
         </Layout.Content>
         <Layout.Footer className={styles.footer}>
-          DNE Sample Web App ©{new Date().getFullYear()} - Created by Don't Nod
+          DNE Web App Starter ©{new Date().getFullYear()} - Created by Don't Nod
         </Layout.Footer>
       </Layout>
       <TanStackRouterDevtools />

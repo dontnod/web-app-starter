@@ -1,11 +1,15 @@
+import { authenticateGuard } from '@/guards/authenticate-guard'
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { Flex } from 'antd'
 
 export const Route = createFileRoute('/todo')({
   component: TodoComponent,
-  beforeLoad: () => ({
-    getTitle: () => 'Todo',
-  }),
+  beforeLoad: async ({ context }) => {
+    await authenticateGuard(context)
+    return {
+      getTitle: () => 'Todo',
+    }
+  },
 })
 
 function TodoComponent() {
