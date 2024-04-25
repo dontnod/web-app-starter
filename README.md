@@ -6,4 +6,4 @@
 [Service documentation](/service/README.md)
 
 # Dev Container
-Copy the `.env.dev.example` into a newly created `.env`
+TODO

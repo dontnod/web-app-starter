@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: application
+    restart: always
+volumes:
+  db-data: {}

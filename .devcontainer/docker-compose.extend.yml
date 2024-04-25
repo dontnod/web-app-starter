@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - DOTNET_BUILDER_IMAGE=8.0
+        - DOTNET_IMAGE_FROM=mcr.microsoft.com/devcontainers/dotnet
+        - NODE_VERSION=20
+    volumes:
+      # Mounts the project folder to '/workspace'. While this file is in .devcontainer,
+      # mounts are relative to the first file in the list, which is a level up.
+      - .:/workspace:cached
+
+    # [Optional] Required for ptrace-based debuggers like C++, Go, and Rust
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: /bin/sh -c "while sleep 1000; do :; done"
+volumes:
+  pgadmin-data:
