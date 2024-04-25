@@ -54,29 +54,11 @@ export const MSAL_CONFIG = {
 }
 
 /**
- * Add here the endpoints and scopes when obtaining an access token for protected web APIs. For more information, see:
- * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
- */
-export const PROTECTED_RESOURCES = {
-  toDoListAPI: {
-    endpoint: 'http://localhost:5197/api/todolist',
-    scopes: {
-      // TODO: move to the config
-      read: ['api://c06a77ec-b4db-4866-9785-a546fc99ade0/ToDoList.Read'], //: ['api://Enter_the_Web_Api_Application_Id_Here/ToDoList.Read'],
-      write: ['api://c06a77ec-b4db-4866-9785-a546fc99ade0/ToDoList.ReadWrite'], //['api://Enter_the_Web_Api_Application_Id_Here/ToDoList.ReadWrite'],
-    },
-  },
-}
-
-/**
  * Scopes you add here will be prompted for user consent during sign-in.
  * By default, MSAL.js will add OIDC scopes (openid, profile, email) to any login request.
  * For more information about OIDC scopes, visit:
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const LOGIN_REQUEST = {
-  scopes: [
-    ...PROTECTED_RESOURCES.toDoListAPI.scopes.read,
-    ...PROTECTED_RESOURCES.toDoListAPI.scopes.write,
-  ],
+  scopes: [...CONFIG.todoApi.scopes.read, ...CONFIG.todoApi.scopes.write],
 }
