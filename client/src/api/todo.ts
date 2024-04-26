@@ -8,11 +8,7 @@ export type CreateTodoDto = components['schemas']['CreateToDoDto']
 export async function getTodoList(signal: AbortSignal) {
   const httpClient = getHttpClient(CONFIG.todoApi.scopes.read, { signal })
 
-  const { data, error } = await httpClient.GET('/api/todolist')
-
-  if (data === undefined) {
-    throw new Error(error)
-  }
+  const { data } = await httpClient.GET('/api/todolist')
 
   return data
 }
@@ -20,13 +16,9 @@ export async function getTodoList(signal: AbortSignal) {
 export async function getTodo(todoId: number, signal: AbortSignal) {
   const httpClient = getHttpClient(CONFIG.todoApi.scopes.read, { signal })
 
-  const { data, error } = await httpClient.GET('/api/todolist/{id}', {
+  const { data } = await httpClient.GET('/api/todolist/{id}', {
     params: { path: { id: todoId } },
   })
-
-  if (data === undefined) {
-    throw new Error(error)
-  }
 
   return data
 }
@@ -34,11 +26,7 @@ export async function getTodo(todoId: number, signal: AbortSignal) {
 export async function addTodo(todo: CreateTodoDto) {
   const httpClient = getHttpClient(CONFIG.todoApi.scopes.write, {})
 
-  const { data, error } = await httpClient.POST('/api/todolist', { body: todo })
-
-  if (data === undefined) {
-    throw new Error(error)
-  }
+  const { data } = await httpClient.POST('/api/todolist', { body: todo })
 
   return data
 }
@@ -46,14 +34,10 @@ export async function addTodo(todo: CreateTodoDto) {
 export async function editTodo(todo: Todo) {
   const httpClient = getHttpClient(CONFIG.todoApi.scopes.write, {})
 
-  const { data, error } = await httpClient.PUT('/api/todolist/{id}', {
+  const { data } = await httpClient.PUT('/api/todolist/{id}', {
     body: todo,
     params: { path: { id: todo.id } },
   })
-
-  if (data === undefined) {
-    throw new Error(error)
-  }
 
   return data
 }

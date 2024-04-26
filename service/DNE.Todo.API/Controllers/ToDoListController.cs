@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.Resource;
 using TodoApi.Context;
 using TodoApi.Models;
+using TodoApi.Permissions;
 
 [Authorize]
 [Route("api/[controller]")]
@@ -20,9 +20,7 @@ public class ToDoListController(ToDoContext toDoContext) : ControllerBase
     private readonly ToDoContext toDoContext = toDoContext;
 
     [HttpGet]
-    [RequiredScopeOrAppPermission(
-        RequiredScopesConfigurationKey = "AzureAD:Scopes:Read",
-        RequiredAppPermissionsConfigurationKey = "AzureAD:AppPermissions:Read")]
+    [ReadTodoPermission]
     public async Task<ActionResult<List<ToDo>>> GetAsync()
     {
         var toDos = await toDoContext.ToDos!
@@ -33,9 +31,7 @@ public class ToDoListController(ToDoContext toDoContext) : ControllerBase
     }
 
     [HttpGet("{id}")]
-    [RequiredScopeOrAppPermission(
-        RequiredScopesConfigurationKey = "AzureAD:Scopes:Read",
-        RequiredAppPermissionsConfigurationKey = "AzureAD:AppPermissions:Read")]
+    [ReadTodoPermission]
     public async Task<ActionResult<ToDo>> GetAsync(int id)
     {
         var toDo = await toDoContext.ToDos!
@@ -50,9 +46,7 @@ public class ToDoListController(ToDoContext toDoContext) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [RequiredScopeOrAppPermission(
-        RequiredScopesConfigurationKey = "AzureAD:Scopes:Write",
-        RequiredAppPermissionsConfigurationKey = "AzureAD:AppPermissions:Write")]
+    [WriteTodoPermission]
     public async Task<ActionResult<ToDo>> PutAsync(int id, [FromBody] ToDo toDo)
     {
         var storedToDo = await toDoContext.ToDos!
@@ -72,9 +66,7 @@ public class ToDoListController(ToDoContext toDoContext) : ControllerBase
     }
 
     [HttpPost]
-    [RequiredScopeOrAppPermission(
-        RequiredScopesConfigurationKey = "AzureAD:Scopes:Write",
-        RequiredAppPermissionsConfigurationKey = "AzureAD:AppPermissions:Write")]
+    [WriteTodoPermission]
     public async Task<ActionResult<ToDo>> PostAsync([FromBody] CreateToDoDto todoDto)
     {
         // Only let applications with global to-do access set the user ID or to-do's
@@ -98,9 +90,7 @@ public class ToDoListController(ToDoContext toDoContext) : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [RequiredScopeOrAppPermission(
-        RequiredScopesConfigurationKey = "AzureAD:Scopes:Write",
-        RequiredAppPermissionsConfigurationKey = "AzureAD:AppPermissions:Write")]
+    [WriteTodoPermission]
     public async Task<IActionResult> DeleteAsync(int id)
     {
         var toDoToDelete = await toDoContext.ToDos!

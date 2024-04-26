@@ -23,6 +23,12 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      },
+    ],
   },
   ignorePatterns: ['vite.config.ts', '.eslintrc.cjs', 'node_modules', 'dist', '*schema.d.ts', 'routeTree.gen.ts'],
 }

@@ -2,8 +2,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using TodoApi.Context;
+using TodoApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.Configure<ClaimSettings>(
+    builder.Configuration.GetSection("AzureAd:ClaimSettings"));
 
 builder.Services.AddHttpContextAccessor();
 
