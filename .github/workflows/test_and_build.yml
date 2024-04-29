@@ -46,6 +46,7 @@ jobs:
         path: ./publish
       
   build-client:
+    needs: build-service
     runs-on: ubuntu-latest
 
     steps:
