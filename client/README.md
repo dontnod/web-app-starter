@@ -38,6 +38,8 @@ export const msalInstance = new PublicClientApplication(MSAL_CONFIG)
 
 The configuration for MSAL is found in [src/config/auth-config.ts](src/config/auth-config.ts)
 
+[Documentation for MSAL specific to React](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/getting-started.md)
+
 ## @tanstack/react-query ([documentation](https://tanstack.com/query/latest/docs/framework/react/overview))
 A simple state management library used to manage API services. It supports auto-caching, optimistic results, and request cancellation. Queries and mutations are managed within the`src/features` folder.
 
@@ -99,43 +101,53 @@ export const CONFIG: Config = configSchema.parse({
 
 ```
 
-
 # Code Structure
+This documentation outlines the organizational structure of the React application's source code, detailing the purpose and functionality of each directory and key files within the project.
 
 ## `src/api`
 
-This folder contains all the stuff related to fetching / mutating the data from / to the api.
+This directory manages all interactions with the API, including data fetching and mutations.
 
-- [src/api/http-client.ts](src/api/http-client.ts): Expose a `getHttpClient` that create a client to consume the API with type safety from the generated `src/api/todo-schema.d.ts`. This also add **middlewares** to setup the user's jwt token on every request.
+- [src/api/http-client.ts](src/api/http-client.ts): Provides a `getHttpClient` function that creates a client for consuming the API with type safety, leveraging the generated types from `src/api/todo-schema.d.ts`. It includes **middlewares** to append the user's JWT token to every request.
 
-- `src/api/todo-schema.d.ts`: Generated type definition of the `DNE.Todo.API` build by the `yarn generated-api` command.
+- `src/api/todo-schema.d.ts`: Contains the generated type definitions for the `DNE.Todo.API`, created by the  `yarn generated-api` command.
 
-- [src/api/query-client.ts](src/api/query-client.ts): Client instance for the `@tanstack/react-query` used by every queries / mutations.
+- [src/api/query-client.ts](src/api/query-client.ts): An instance of `@tanstack/react-query` used for handling queries and mutations throughout the application.
 
-- [src/api/todo.ts](src/api//todo.ts): Expose `DELETE`/`GET`/`POST`/`PUT` functions on the todo's api with the http client.
+- [src/api/todo.ts](src/api//todo.ts): Defines CRUD functions (`DELETE`, `GET`, `POST`, `PUT`) for interacting with the todo API, utilizing the http client.
 
 ## `src/components`
 
-This folder contains generic components used by [route components](src/routes) or other components.
+This folder houses reusable components that are used either within [route components](src/routes) or elsewhere in the application.
 
 ## `src/config`
 
-This folder contains file related to the configuration of the application.
+This directory contains configuration files for the application.
 
-- [src/config/config.ts](src/config/config.ts): Contains the global config of the application, the `CONFIG` object is build from the environment variables (`.env`).
+- [src/config/config.ts](src/config/config.ts): Stores the global configuration of the application, assembling the `CONFIG` object from environment variables defined in `.env`.
 
-- [src/config/auth-config.ts](src/config/auth-config.ts): Authentication configuration for MSAL.
+- [src/config/auth-config.ts](src/config/auth-config.ts): Contains the authentication settings for MSAL.
 
 ## `src/features`
 
-Contains all the queries / mutations made with `@tanstack/query` used then by the react components in order to fetch or edit data from the api.
+Includes all the `@tanstack/react-query` queries and mutations, which are utilized by React components to fetch or update data from the API.
 
 ## `src/guards`
 
 Contains **route guards** used by [routes](src/routes) in order to restrict the access of a route.
 
-- [src/guards/authenticate-guard.ts](src/guards/authenticate-guard.ts): Ensure that the user is authenticated, otherwise redirect the user to the login page.
+- [src/guards/authenticate-guard.ts](src/guards/authenticate-guard.ts): Verifies user authentication and redirects unauthenticated users to the login page if necessary.
 
 ## `src/routes`
 
-Contains all the routes of the application generated with `@tanskactk/router`, you can get more information on naming conventions for routes [there](https://tanstack.com/router/latest/docs/framework/react/guide/file-based-routing)/
+Manages all application routes, structured and handled via @tanstack/router. For naming conventions and routing structures, refer to the [File-Based Routing Guide](https://tanstack.com/router/latest/docs/framework/react/guide/file-based-routing).
+
+## `src/utils`
+
+Contains utility functions and classes that support various functionalities across the application.
+
+- [src/utils/claim-utils.ts](src/utils/claim-utils.ts): A helper utility for constructing a claims table from a [ID Token Claims](https://learn.microsoft.com/en-us/entra/identity-platform/id-token-claims-reference),  demonstrating how to extract claim information for a user.
+
+- [src/utils/msal-navigation-client.ts](src/utils/msal-navigation-client.ts): A custom [NavigationClient](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/performance.md) class to bind `@tanstack/react-router` to the instance of **MSAL** this allows MSAL to redirect to the user coming page when doing a login.
+
+This structure ensures a modular and clear organization of code, simplifying maintenance and scalability of the application.

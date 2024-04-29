@@ -7,10 +7,17 @@ This starter kit is a boilerplate based on the https://github.com/Azure-Samples/
 2. The **ID Token** proves that the user has successfully authenticated against Azure AD for Customers.
 ![alt text](docs/scenario.png)
 
-# Client
+# Prerequisites
+- Either [Visual Studio](https://visualstudio.microsoft.com/downloads/) or Visual Studio Code and [.NET Core SDK](https://www.microsoft.com/net/learn/get-started)
+- [Node.js](https://nodejs.org/en/download/current) and [Yarn](https://yarnpkg.com/getting-started/install).
+- An Azure AD tenant.
+
+# Setup the starter
+
+## Setup the Client
 For details on setting up and running the client, see the [Client documentation](/client/README.md)
 
-# Service
+## Setup the Service
 For details on setting up and running the service, see the [Service documentation](/service/README.md)
 
 # Docker
