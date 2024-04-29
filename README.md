@@ -35,7 +35,7 @@ VITE_TODO_API_SCOPES_WRITE=["api://{your_azure_api_application_id}/ToDoList.Read
 docker compose up
 ```
 
-# Dev Container
+## Running the app in a Dev Container
 This project supports opening directly in a fully configured development container using Visual Studio Code's Dev Container feature. The provided Docker image comes pre-configured with the .NET SDK and Node.js, setting up a ready-to-run development environment for the application.
 
 1. **Install Prerequisites:**
@@ -53,3 +53,20 @@ Use the Command Palette (`Ctrl+Shift+P` or Cmd+Shift+P on Mac) and select 'Remot
 4. **Verify Environment:**
 
 Once the container is running, open a terminal in VS Code to verify that the .NET SDK and Node.js are installed correctly by running `dotnet --version` and `node --version`.
+
+## Running the App in Production Using Docker
+This project can be deployed and run within a Docker container. First, ensure you have created and configured the `.env` file as described in the previous documentation sections. This file should contain all necessary environment variables for the application to run correctly in production.
+
+Once the .env file is set up, execute the following command to build and start the Docker container:
+
+```sh
+docker compose up --build -d
+```
+
+This command performs the following actions:
+
+- `--build`: This option ensures that Docker builds the images before starting the containers, which is essential if you have made changes to the Dockerfile or other components of the Docker setup.
+
+- `-d`: This runs the containers in detached mode, meaning they run in the background and do not block the terminal.
+
+Ensure Docker is installed and running on your machine before executing the command. This setup allows for a streamlined deployment process, encapsulating the application within a container for consistent performance across different environments.
