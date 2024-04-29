@@ -1,3 +1,5 @@
+![test & Build](https://github.com/dontnod/web-app-starter/actions/workflows/test_and_build.yml/badge.svg)
+
 # DNE Web App Starter
 
 This starter kit is a boilerplate based on the https://github.com/Azure-Samples/ms-identity-ciam-javascript-tutorial/tree/main/2-Authorization/1-call-api-react. It demonstrates how to build a web application with a React SPA (Single Page Application) client and a .NET 8 backend, leveraging Azure AD and MSAL for authentication. For detailed guidance on configuring Azure AD and MSAL, please refer to the [there](https://github.com/Azure-Samples/ms-identity-ciam-javascript-tutorial/tree/main/2-Authorization/1-call-api-react).
