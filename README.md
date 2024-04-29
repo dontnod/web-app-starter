@@ -1,12 +1,20 @@
 # DNE Web App Starter
+
+This starter kit is a boilerplate based on the https://github.com/Azure-Samples/ms-identity-ciam-javascript-tutorial/tree/main/2-Authorization/1-call-api-react. It demonstrates how to build a web application with a React SPA (Single Page Application) client and a .NET 8 backend, leveraging Azure AD and MSAL for authentication. For detailed guidance on configuring Azure AD and MSAL, please refer to the [there](https://github.com/Azure-Samples/ms-identity-ciam-javascript-tutorial/tree/main/2-Authorization/1-call-api-react).
+
+# Scenario
+1. The client **React SPA** uses the to sign-in a user and obtain a JWT ID Token from Azure AD for Customers.
+2. The **ID Token** proves that the user has successfully authenticated against Azure AD for Customers.
+![alt text](docs/scenario.png)
+
 # Client
-[Client documentation](/client/README.md)
+For details on setting up and running the client, see the [Client documentation](/client/README.md)
 
 # Service
-[Service documentation](/service/README.md)
+For details on setting up and running the service, see the [Service documentation](/service/README.md)
 
 # Docker
-Create a `.env` at the root of the project with the following values :
+Create a `.env` file at the root of the project and populate it with the following values to configure your environment:
 ```sh
 AZURE_TENANT_ID={your_azure_tenant_id}
 AZURE_CLIENT_ID={your_azure_api_application_client_id}
@@ -21,4 +29,20 @@ docker compose up
 ```
 
 # Dev Container
-TODO
+This project supports opening directly in a fully configured development container using Visual Studio Code's Dev Container feature. The provided Docker image comes pre-configured with the .NET SDK and Node.js, setting up a ready-to-run development environment for the application.
+
+1. **Install Prerequisites:**
+
+Ensure that you have Visual Studio Code installed along with the Remote - Containers extension. You will also need Docker installed and running on your machine.
+
+2. **Open the Project in VS Code:**
+
+Open the project folder in Visual Studio Code. VS Code may prompt you to reopen the project in a container. If it does not, you can manually reopen it in a container by following the next step.
+
+3. **Reopen in Container:**
+
+Use the Command Palette (`Ctrl+Shift+P` or Cmd+Shift+P on Mac) and select 'Remote-Containers: Reopen in Container'. This command will start the process of building the Docker image (if it's not already built) and configuring the container.
+
+4. **Verify Environment:**
+
+Once the container is running, open a terminal in VS Code to verify that the .NET SDK and Node.js are installed correctly by running `dotnet --version` and `node --version`.
