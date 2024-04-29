@@ -23,6 +23,9 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
+    - name: Restore tool dependencies
+      working-directory: ./service/DNE.Todo.API
+      run: dotnet tool restore
     - name: Build
       run: dotnet build --no-restore
     - name: Test
@@ -38,6 +41,7 @@ jobs:
       with:
         node-version: 20.x
         cache: "yarn"
+        cache-dependency-path: ./client/package-lock.json
     - name: Restore dependencies
       working-directory: ./client
       run: yarn install --immutable
