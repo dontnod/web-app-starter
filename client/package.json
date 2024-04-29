@@ -7,8 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc &&  vite build",
-    "generate-api-dev": "openapi-typescript ../service/DNE.Todo.API/bin/Debug/net8.0/openapi.json -o src/api/todo-schema.d.ts",
-    "generate-api": "openapi-typescript $0 -o src/api/todo-schema.d.ts",
+    "router:generate": "tsr generate",
+    "api:generate:dev": "openapi-typescript ../service/DNE.Todo.API/bin/Debug/net8.0/openapi.json -o src/api/todo-schema.d.ts",
+    "api:generate": "openapi-typescript $0 -o src/api/todo-schema.d.ts",
     "lint": "eslint .  --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -31,6 +32,7 @@
     "zod": "^3.23.3"
   },
   "devDependencies": {
+    "@tanstack/router-cli": "^1.30.0",
     "@tanstack/router-devtools": "^1.29.2",
     "@tanstack/router-vite-plugin": "^1.30.0",
     "@types/node": "^20.12.7",

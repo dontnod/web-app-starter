@@ -26,6 +26,12 @@ dotnet user-secrets set "AzureAd:TenantId" "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbb" --
 ### App settings
 [appsettings.json](appsettings.json) can be edited to match your needs. This files contains the `scope names` / `app permissions` (user roles) / `claim settings` for Azure AD.
 
+# Run the project
+```sh
+dotnet run
+```
+
+
 # Code Structure
 
 ## `Controllers`

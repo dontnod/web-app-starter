@@ -78,7 +78,11 @@ jobs:
 
     - name: Generate API
       working-directory: ./client
-      run: yarn generate-api ../dotnet-artifacts/openapi.json
+      run: yarn api:generate ../dotnet-artifacts/openapi.json    
+
+    - name: Generate Router
+      working-directory: ./client
+      run: yarn router:generate
 
     - name: Check lint
       working-directory: ./client
