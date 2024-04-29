@@ -6,7 +6,7 @@
             "command": "yarn",
             "type": "process",
             "args": [
-                "generate-api"
+                "generate-api-dev"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/client",

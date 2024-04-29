@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "yarn generate-api && tsc &&  vite build",
-    "generate-api": "openapi-typescript ../service/DNE.Todo.API/bin/Debug/net8.0/openapi.json -o src/api/todo-schema.d.ts",
+    "build": "tsc &&  vite build",
+    "generate-api-dev": "openapi-typescript ../service/DNE.Todo.API/bin/Debug/net8.0/openapi.json -o src/api/todo-schema.d.ts",
+    "generate-api": "openapi-typescript $0 -o src/api/todo-schema.d.ts",
     "lint": "eslint .  --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

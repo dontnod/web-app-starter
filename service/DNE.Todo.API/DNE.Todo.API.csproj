@@ -44,6 +44,7 @@
     <Message Text="Building Client App. This may take a while." />
 <!-- Compile The client App //-->
     <Exec Command="yarn" Condition="'$(RestorePackagesWithLockFile)' != 'true'" WorkingDirectory="$(MSBuildProjectDirectory)/../../client" />
+    <Exec Command="yarn generate-api $(TargetDir)/openapi.json" Condition="'$(RestorePackagesWithLockFile)' != 'true'" WorkingDirectory="$(MSBuildProjectDirectory)/../../client" />
     <Exec Command="yarn build" Condition="'$(RestorePackagesWithLockFile)' != 'true'" WorkingDirectory="$(MSBuildProjectDirectory)/../../client" />
 
 <!-- Copy it to the wwwroot folder //-->

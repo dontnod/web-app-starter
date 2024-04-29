@@ -11,7 +11,7 @@ yarn install
 ### Generate API Schema
 Run the following command after the first build of the API to generate the API schema:
 ```sh
-yarn generate-api
+yarn generate-api-dev
 ```
 
 # Environment Setup
@@ -55,7 +55,7 @@ A static code analysis tool that helps enforce coding standards for the frontend
 A comprehensive suite of React UI components that enhance UI development efficiency, similar to Bootstrap.
 
 ## openapi-fetch / openapi-typescript ([documentation](https://github.com/drwpow/openapi-typescript))
-Type-safe fetch client that generates TypeScript types from static [OpenAPI](https://spec.openapis.org/oas/latest.html) schemas using Node.js. It ensures type safety when consuming the .NET API. The  **openapi.json** file is created during the build phase of `DNE.Todo.API` and is located at `/service/DNE.Todo.API/bin/Debug/net8.0/openapi.json`. The `yarn generate-api` command then generates `src/api/todo-schema.d.ts` from this file.
+Type-safe fetch client that generates TypeScript types from static [OpenAPI](https://spec.openapis.org/oas/latest.html) schemas using Node.js. It ensures type safety when consuming the .NET API. The  **openapi.json** file is created during the build phase of `DNE.Todo.API` and is located at `/service/DNE.Todo.API/bin/Debug/net8.0/openapi.json`. The `yarn generate-api-dev` command then generates `src/api/todo-schema.d.ts` from this file.
 
 ## react-hook-form ([documentation](https://react-hook-form.com/))
 Provides efficient and flexible form management in React, supporting form validation, nested forms, array forms, and more.
