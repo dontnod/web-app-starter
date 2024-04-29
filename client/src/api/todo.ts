@@ -10,7 +10,7 @@ export async function getTodoList(signal: AbortSignal) {
 
   const { data } = await httpClient.GET('/api/todolist')
 
-  return data
+  return data!
 }
 
 export async function getTodo(todoId: number, signal: AbortSignal) {
@@ -20,7 +20,7 @@ export async function getTodo(todoId: number, signal: AbortSignal) {
     params: { path: { id: todoId } },
   })
 
-  return data
+  return data!
 }
 
 export async function addTodo(todo: CreateTodoDto) {
@@ -28,7 +28,7 @@ export async function addTodo(todo: CreateTodoDto) {
 
   const { data } = await httpClient.POST('/api/todolist', { body: todo })
 
-  return data
+  return data!
 }
 
 export async function editTodo(todo: Todo) {
@@ -39,7 +39,7 @@ export async function editTodo(todo: Todo) {
     params: { path: { id: todo.id } },
   })
 
-  return data
+  return data!
 }
 
 export async function deleteTodo(todoId: number) {
@@ -49,5 +49,5 @@ export async function deleteTodo(todoId: number) {
     params: { path: { id: todoId } },
   })
 
-  return data
+  return data!
 }
