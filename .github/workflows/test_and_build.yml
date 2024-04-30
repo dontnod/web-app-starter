@@ -40,11 +40,8 @@ jobs:
       working-directory: ./service/DNE.Todo.API
       run: dotnet tool restore
 
-    - name: Build
-      run: dotnet build --no-restore --configuration Release
-
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --verbosity normal
 
     - name: Publish
       run: dotnet publish --configuration Release --output ./publish
@@ -67,6 +64,10 @@ jobs:
       with:
         name: dotnet-artifacts
         path: ./dotnet-artifacts
+
+    - run: ls ./dotnet-artifacts
+
+    - run: ls ./client
 
     - run: corepack enable
 
