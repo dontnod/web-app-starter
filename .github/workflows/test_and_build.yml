@@ -10,8 +10,16 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+# Edit this values to match your environment
 env:
   API_URL: "localhost:8080"
+  AZURE_TENANT_ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaa"
+  AZURE_CLIENT_ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaa"
+  VITE_AZURE_CLIENT_ID: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaa
+  VITE_AZURE_AUTHORITY: https://login.microsoftonline.com/{your_tenant_id}
+  VITE_TODO_API_ENDPOINT_URL: http://localhost:8080
+  VITE_TODO_API_SCOPES_READ: "[\"api://aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaa/ToDoList.Read\"]"
+  VITE_TODO_API_SCOPES_WRITE: "[\"api://aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaa/ToDoList.ReadWrite\"]"
 
 jobs:
   build-service:
