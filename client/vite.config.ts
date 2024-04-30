@@ -32,12 +32,6 @@ export default ({ mode }) => {
       proxy: {
         '/api': {
           target: API_URL,
-          // secure: false,
-          changeOrigin: true,
-        },
-        '/static': {
-          target: 'https://maps.lan.dont-nod.com',
-          secure: false,
           changeOrigin: true,
         },
       },
