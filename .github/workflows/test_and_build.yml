@@ -69,8 +69,6 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: openapi.json
-        path: ./openapi.json
-
 
     - run: corepack enable
 
