@@ -46,6 +46,12 @@ jobs:
     - name: Publish
       run: dotnet publish --configuration Release --output ./publish
 
+    - name: Upload Open API Definiton
+      uses: actions/upload-artifact@v3
+      with:
+        name: openapi.json
+        path: ./service/DNE.Todo.API/bin/Release/net8.0/openapi.json
+
     - name: Upload .NET artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -59,15 +65,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Download .NET build artifacts for generating the api types
+    - name: Download Open API artifacts for generating the api types
       uses: actions/download-artifact@v3
       with:
-        name: dotnet-artifacts
-        path: ./dotnet-artifacts
+        name: openapi.json
+        path: ./openapi.json
 
-    - run: ls ./dotnet-artifacts
-
-    - run: ls ./client
 
     - run: corepack enable
 
@@ -82,7 +85,7 @@ jobs:
 
     - name: Generate API
       working-directory: ./client
-      run: yarn api:generate ../dotnet-artifacts/openapi.json    
+      run: yarn api:generate ../openapi.json   
 
     - name: Generate Router
       working-directory: ./client
