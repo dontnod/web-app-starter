@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom/vitest'
 import { describe, beforeEach, it, expect, vi } from 'vitest'
@@ -21,9 +21,7 @@ describe('TodoForm Component', () => {
     render(<TodoForm onSubmitted={mockOnSubmitted} submitText="Add Todo" />)
 
     await userEvent.type(screen.getByPlaceholderText('Enter task description'), 'Buy milk')
-    await act(async () => {
-      await userEvent.click(screen.getByRole('button', { name: 'Add Todo' }))
-    })
+    await userEvent.click(screen.getByRole('button', { name: 'Add Todo' }))
 
     await waitFor(() => {
       expect(mockOnSubmitted).toHaveBeenCalledWith({
@@ -45,9 +43,8 @@ describe('TodoForm Component', () => {
 
   it('validates input fields', async () => {
     render(<TodoForm onSubmitted={mockOnSubmitted} submitText="Add Todo" />)
-    await act(async () => {
-      await userEvent.click(screen.getByRole('button', { name: 'Add Todo' }))
-    })
+
+    await userEvent.click(screen.getByRole('button', { name: 'Add Todo' }))
 
     await waitFor(() => {
       // Assuming your form displays error messages for validation

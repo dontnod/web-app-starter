@@ -31,7 +31,7 @@ export default ({ mode }) => {
     test: {
       environment: 'happy-dom',
       globals: true,
-      setupFiles: './src/setup-test.ts'
+      setupFiles: './src/__tests__/setup.ts'
     },
     server: {
       host: `${VITE_HOST}`,

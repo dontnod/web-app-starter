@@ -97,6 +97,10 @@ jobs:
       working-directory: ./client
       run: yarn router:generate
 
+    - name: Type check
+      working-directory: ./client
+      run: yarn type-check
+
     - name: Check lint
       working-directory: ./client
       run: yarn lint

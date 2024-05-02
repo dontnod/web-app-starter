@@ -33,6 +33,7 @@ export function TodoList() {
             actions={[
               <Button
                 type="default"
+                name="edit"
                 icon={<EditOutlined />}
                 onClick={() => navigate({ to: '/todo/$id', params: { id: todo.id.toString() } })}
               ></Button>,
@@ -43,7 +44,7 @@ export function TodoList() {
                 cancelText="No"
                 onConfirm={() => deleteTodoMutation.mutate(todo.id)}
               >
-                <Button danger icon={<DeleteOutlined />}></Button>
+                <Button name="delete" danger icon={<DeleteOutlined />}></Button>
               </Popconfirm>,
             ]}
           >
