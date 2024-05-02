@@ -24,9 +24,9 @@ export class MsalNavigationClient extends NavigationClient {
 
     this.router.state.location.href = relativePath
     if (options.noHistory) {
-      this.router.navigate({ replace: true, to: relativePath })
+      await this.router.navigate({ replace: true, to: relativePath })
     } else {
-      this.router.navigate({ to: relativePath })
+      await this.router.navigate({ to: relativePath })
     }
 
     return false

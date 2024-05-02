@@ -72,8 +72,8 @@ export function NavigationBar({ className }: NavigationBarProps) {
     ],
   }
 
-  const handleMenuNavigation = (key: string) => {
-    navigate({ to: key })
+  const handleMenuNavigation = async (key: string) => {
+    await navigate({ to: key })
   }
 
   return (

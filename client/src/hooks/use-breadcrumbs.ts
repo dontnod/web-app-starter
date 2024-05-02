@@ -39,10 +39,10 @@ export function useBreadcrumbs(): BreadcrumbProps['items'] {
     .map((item) => ({
       ...item,
       ...(item.href && {
-        onClick: (e) => {
+        onClick: async (e) => {
           // Prevents browser to refresh the page when navigating to a breadcrumb item
           e.preventDefault()
-          router.navigate({ to: item.href })
+          await router.navigate({ to: item.href })
         },
       }),
     }))

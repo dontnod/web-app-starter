@@ -54,10 +54,10 @@ export function useEditTodo({ onSuccess, onError }: UseEditTodoOptions) {
       }
     },
     // Always refetch after error or success:
-    onSettled: (editedTodo) => {
-      queryClient.invalidateQueries({ queryKey: GetTodoList.getQueryKey() })
+    onSettled: async (editedTodo) => {
+      await queryClient.invalidateQueries({ queryKey: GetTodoList.getQueryKey() })
       if (editedTodo) {
-        queryClient.invalidateQueries({ queryKey: GetTodo.getQueryKey(editedTodo.id) })
+        await queryClient.invalidateQueries({ queryKey: GetTodo.getQueryKey(editedTodo.id) })
       }
     },
   })

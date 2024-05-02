@@ -14,11 +14,11 @@ export const Route = createFileRoute('/todo/$id')({
 function EditTodoComponent() {
   const [messageApi, contextHolder] = message.useMessage()
   const addTodoMutation = useEditTodo({
-    onSuccess: () => {
-      messageApi.success('Todo has been updated')
+    onSuccess: async () => {
+      await messageApi.success('Todo has been updated')
     },
-    onError: (err) => {
-      messageApi.error(err.toString())
+    onError: async (err) => {
+      await messageApi.error(err.toString())
     },
   })
   const params = Route.useParams()

@@ -45,10 +45,10 @@ export function useAddTodo({ onSuccess, onError }: UseAddTodoOptions) {
       queryClient.setQueryData(GetTodoList.getQueryKey(), context.previousTodoList)
     },
     // Always refetch after error or success:
-    onSettled: (addedTodo) => {
-      queryClient.invalidateQueries({ queryKey: GetTodoList.getQueryKey() })
+    onSettled: async (addedTodo) => {
+      await queryClient.invalidateQueries({ queryKey: GetTodoList.getQueryKey() })
       if (addedTodo) {
-        queryClient.invalidateQueries({ queryKey: GetTodo.getQueryKey(addedTodo.id) })
+        await queryClient.invalidateQueries({ queryKey: GetTodo.getQueryKey(addedTodo.id) })
       }
     },
   })

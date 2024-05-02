@@ -101,6 +101,10 @@ jobs:
       working-directory: ./client
       run: yarn lint
 
+    - name: Run tests
+      working-directory: ./client
+      run: yarn test --run
+
     - name: Build
       working-directory: ./client
       run: yarn build

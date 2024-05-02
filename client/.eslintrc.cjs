@@ -16,15 +16,16 @@ module.exports = {
   rules: {
     'react-hooks/rules-of-hooks':'off',
     'no-unused-vars': 'off',
+    '@typescript-eslint/no-floating-promises': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-unused-vars': 'error',
-    "@typescript-eslint/no-unnecessary-condition":'error',
+    '@typescript-eslint/no-unnecessary-condition':'error',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
-    "prettier/prettier": [
-      "error",
+    'prettier/prettier': [
+      'error',
       {
         "endOfLine": "auto"
       },

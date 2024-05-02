@@ -49,8 +49,8 @@ export function useDeleteTodo({ onSuccess, onError }: UseAddTodoOptions) {
       queryClient.setQueryData(GetTodoList.getQueryKey(), context.previousTodoList)
     },
     // Always refetch after error or success:
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: GetTodoList.getQueryKey() })
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey: GetTodoList.getQueryKey() })
     },
   })
 }

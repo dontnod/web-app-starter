@@ -10,11 +10,11 @@ export const Route = createFileRoute('/todo/')({
 function TodoComponent() {
   const [messageApi, contextHolder] = message.useMessage()
   const addTodoMutation = useAddTodo({
-    onSuccess: () => {
-      messageApi.success('Todo has been created')
+    onSuccess: async () => {
+      await messageApi.success('Todo has been created')
     },
-    onError: (err) => {
-      messageApi.error(err.toString())
+    onError: async (err) => {
+      await messageApi.error(err.toString())
     },
   })
 

@@ -30,7 +30,7 @@
   },
   "include": [
     "src"
-  ],
+, "__tests__"  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

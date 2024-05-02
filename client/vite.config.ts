@@ -1,8 +1,10 @@
+/// <reference types="vitest" />
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 import checker from 'vite-plugin-checker'
 import path from 'path'
+
 
 // @ts-expect-error mode is not defined
 export default ({ mode }) => {
@@ -26,6 +28,11 @@ export default ({ mode }) => {
       // basicSsl(),
       TanStackRouterVite(),
     ],
+    test: {
+      environment: 'happy-dom',
+      globals: true,
+      setupFiles: './src/setup-test.ts'
+    },
     server: {
       host: `${VITE_HOST}`,
       port: +`${VITE_PORT}`,

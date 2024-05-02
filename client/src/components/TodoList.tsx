@@ -10,11 +10,11 @@ export function TodoList() {
   const todoListQuery = useGetTodoList()
 
   const deleteTodoMutation = useDeleteTodo({
-    onSuccess: () => {
-      messageApi.success('Todo has been deleted')
+    onSuccess: async () => {
+      await messageApi.success('Todo has been deleted')
     },
-    onError: (err) => {
-      messageApi.error(err.toString())
+    onError: async (err) => {
+      await messageApi.error(err.toString())
     },
   })
 
