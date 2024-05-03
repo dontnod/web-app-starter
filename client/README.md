@@ -2,6 +2,101 @@
 
 This is a React Single Page Application (SPA) that retrieves a JWT token from Azure AD using MSAL and then consumes a .NET API.
 
+## EntraID/AzureAD setup
+### Create an App registration
+It must be single-tenant. This identity is used to manage user access.
+#### Manually
+1. Navigate to the [Azure portal](https://portal.azure.com/) and select the `Microsoft Entra ID`.
+1. Select `Manage > App Registrations` blade on the left, then select `New registration`.
+1. In the Register an application page that appears, under `Supported account types`, select `Accounts in this organizational directory only` and click on `Register`.
+1. In the `Overview` blade, find and note the `Application (client) ID`. You use this value in your app's configuration file(s) later in your code.
+
+#### CLI
+First install az cli and sign in `az login --allow-no-subscriptions`, then run:
+```
+echo "Name of Client Identity? (Type and press enter to continue)" && read -r CLIENT_NAME
+CLIENT_ID=$(az ad app create --display-name $CLIENT_NAME --sign-in-audience AzureADMyOrg --query appId --output tsv)
+```
+
+### Setup redirect URIs
+It must be single-tenant. This identity is used to manage user access.
+#### Manually
+1. In the Overview blade, find and note the `Application (client) ID`. You use this value in your app's configuration file(s) later in your code.
+1. In the app's registration screen, select the Authentication blade to the left.
+1. If you don't have a platform added, select Add a platform and select the Single-page application option.
+1. In the Redirect URI section enter the following redirect URIs:
+   1.`http://localhost:3002`
+   1.`http://localhost:3002/redirect.html`
+1. Click Save to save your changes.
+![redirect_uri.png](doc_assets/redirect_uri.png)
+#### CLI
+```
+cat <<EOF > redirectUris.json 
+{
+    "redirectUris": [
+      "http://localhost:3002",
+      "http://localhost:3002/redirect.html"
+    ]
+}
+EOF
+az ad app update --id $CLIENT_ID --set spa=@redirectUris.json
+```
+
+### Setup delegated permissions
+
+#### Manually
+Since this app signs-in users, we will now proceed to select delegated permissions, which is is required by apps signing-in users.
+1. Select `Manage > API permissions` blade in the left to open the page where we add access to the APIs that your application needs:
+1. Select the `Add a permission` button and then:
+   1. Ensure that the `Microsoft APIs` tab is selected.
+   1. In the `Commonly used Microsoft APIs` section, select `Microsoft Graph`
+      ![create_api_permission.png](doc_assets/create_api_permission.png)
+   1. In the `Delegated permissions` section, select `User.read` in the list. Use the search box if necessary.
+      ![user_read_permissions.png](doc_assets/user_read_permissions.png)
+   1. Select the `Add permissions` button at the bottom.
+1. Select the Add a permission button and then:
+   1. Ensure that the `My APIs` tab is selected.
+   1. In the list of APIs, select the API `DNE Tools Sample API`.
+   1. In the Delegated permissions section, select `ToDoList.Read`, `ToDoList.ReadWrite` in the list. Use the search box if necessary.
+   1. Select the `Add permissions` button at the bottom.
+   2. ![my_api_permissions.png](doc_assets/my_api_permissions.png)
+1. At this stage, the permissions are assigned correctly, the users themselves cannot consent to these permissions. To get around this problem, we'd let the [tenant administrator consent on behalf of all users in the tenant](https://learn.microsoft.com/en-us/entra/identity-platform/v2-admin-consent). Select the `Grant admin consent for {tenant} button`, and then select Yes when you are asked if you want to grant consent for the requested permissions for all accounts in the tenant. You need to be a tenant admin to be able to carry out this operation.
+
+#### CLI
+NB: `e1fe6dd8-ba31-4d61-89e7-88639da4683d` resource ID is `Microsoft Graph > User.read` permission.
+```
+APP_ID=$(az ad app list --filter "displayname eq 'DNE Tools Sample API'" --query [0].appId  | sed 's,",,g')
+ressource_readwrite_id=$(az ad app show --id $APP_ID --query api.oauth2PermissionScopes[0].id | sed 's,",,g')
+ressource_read_id=$(az ad app show --id $APP_ID --query api.oauth2PermissionScopes[1].id | sed 's,",,g')
+cat <<EOF > requiredResourceAccess.json 
+[{
+   "resourceAppId": "$APP_ID",
+   "resourceAccess": [
+       {
+           "id": "$ressource_readwrite_id",
+           "type": "Scope"
+       },
+       {
+           "id": "$ressource_read_id",
+           "type": "Scope"
+       }
+   ]
+},
+{
+   "resourceAppId": "00000003-0000-0000-c000-000000000000",
+   "resourceAccess": [
+       {
+           "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+           "type": "Scope"
+       }
+   ]
+}]
+EOF
+
+az ad app update --id $CLIENT_ID --required-resource-accesses @requiredResourceAccess.json
+```
+
+## Setup client application 
 ### Install dependencies
 To install project dependencies, run the following command:
 ```sh
