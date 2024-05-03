@@ -20,7 +20,7 @@ This starter kit is a boilerplate based on the https://github.com/Azure-Samples/
 For details on setting up and running the client, see the [Client documentation](/client/README.md)
 
 ## Setup the Service
-For details on setting up and running the service, see the [Service documentation](/service/README.md)
+For details on setting up and running the service, see the [Service documentation](/service/DNE.Todo.API/README.md)
 
 # Docker
 Create a `.env` file at the root of the project and populate it with the following values to configure your environment:
