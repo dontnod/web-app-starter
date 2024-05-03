@@ -6,26 +6,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
-using TodoApi.Context;
 using TodoApi.Models;
 using TodoApi.Permissions;
+using TodoApi.Repositories;
 
 [Authorize]
 [Route("api/[controller]")]
 [ApiController]
-public class ToDoListController(ToDoContext toDoContext) : ControllerBase
+public class ToDoListController(IToDoRepository toDoRepository) : ControllerBase
 {
-    private readonly ToDoContext toDoContext = toDoContext;
-
     [HttpGet]
     [ReadTodoPermission]
     public async Task<ActionResult<List<ToDo>>> GetAsync()
     {
-        var toDos = await toDoContext.ToDos!
-            .Where(td => RequestCanAccessToDo(td.Owner))
-            .ToListAsync();
+        var test = IsAppMakingRequest();
+        var toDos = test ?
+            await toDoRepository.GetAllAsync() :
+            await toDoRepository.GetListByOwnerAsync(GetUserId());
 
         return Ok(toDos);
     }
@@ -34,10 +32,9 @@ public class ToDoListController(ToDoContext toDoContext) : ControllerBase
     [ReadTodoPermission]
     public async Task<ActionResult<ToDo>> GetAsync(int id)
     {
-        var toDo = await toDoContext.ToDos!
-            .FirstOrDefaultAsync(td => RequestCanAccessToDo(td.Owner) && td.Id == id);
+        var toDo = await toDoRepository.GetByIdAsync(id);
 
-        if (toDo is null)
+        if (toDo is null || !RequestCanAccessToDo(toDo.Owner))
         {
             return NotFound();
         }
@@ -49,18 +46,15 @@ public class ToDoListController(ToDoContext toDoContext) : ControllerBase
     [WriteTodoPermission]
     public async Task<ActionResult<ToDo>> PutAsync(int id, [FromBody] ToDo toDo)
     {
-        var storedToDo = await toDoContext.ToDos!
-            .FirstOrDefaultAsync(td => RequestCanAccessToDo(td.Owner) && td.Id == id);
+        var storedToDo = await toDoRepository.GetByIdAsync(id);
 
-        if (storedToDo is null)
+        if (storedToDo is null || !RequestCanAccessToDo(toDo.Owner))
         {
             return NotFound();
         }
 
         storedToDo.Description = toDo.Description;
-        toDoContext.ToDos!.Update(storedToDo);
-
-        await toDoContext.SaveChangesAsync();
+        await toDoRepository.UpdateAsync(storedToDo);
 
         return Ok(storedToDo);
     }
@@ -83,8 +77,7 @@ public class ToDoListController(ToDoContext toDoContext) : ControllerBase
             Description = todoDto.Description,
         };
 
-        await toDoContext.ToDos!.AddAsync(newToDo);
-        await toDoContext.SaveChangesAsync();
+        await toDoRepository.AddAsync(newToDo);
 
         return Created($"/todo/{newToDo!.Id}", newToDo);
     }
@@ -93,17 +86,14 @@ public class ToDoListController(ToDoContext toDoContext) : ControllerBase
     [WriteTodoPermission]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        var toDoToDelete = await toDoContext.ToDos!
-            .FirstOrDefaultAsync(td => RequestCanAccessToDo(td.Owner) && td.Id == id);
+        var toDoToDelete = await toDoRepository.GetByIdAsync(id);
 
-        if (toDoToDelete is null)
+        if (toDoToDelete is null || !RequestCanAccessToDo(toDoToDelete.Owner))
         {
             return NotFound();
         }
 
-        toDoContext.ToDos!.Remove(toDoToDelete);
-
-        await toDoContext.SaveChangesAsync();
+        await toDoRepository.DeleteAsync(toDoToDelete);
 
         return Ok();
     }

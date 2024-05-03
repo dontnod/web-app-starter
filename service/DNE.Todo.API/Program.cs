@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using TodoApi.Context;
 using TodoApi.Models;
+using TodoApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ builder.Services.AddDbContext<ToDoContext>(options =>
 {
     options.UseInMemoryDatabase("ToDos");
 });
+
+builder.Services.AddScoped<IToDoRepository, ToDoRepository>();
 
 builder.Services.Configure<RouteOptions>(options =>
 {

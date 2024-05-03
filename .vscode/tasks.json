@@ -48,6 +48,13 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "args": [ "test" ],
+            "isTestCommand": true,
+            "problemMatcher": "$msCompile"
         }
     ]
 }

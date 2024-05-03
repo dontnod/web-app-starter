@@ -3,7 +3,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-public class ToDo
+public record ToDo
 {
     [Required]
     public int Id { get; set; }

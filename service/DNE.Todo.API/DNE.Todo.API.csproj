@@ -31,8 +31,7 @@
     <PackageReference Include="MongoDB.Driver" Version="2.24.0" />
     <PackageReference Include="DotSwashbuckle.AspNetCore" Version="3.0.8" />
     <PackageReference Include="DotSwashbuckle.AspNetCore.Annotations" Version="3.0.8" />
-        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="All" />
-    <AdditionalFiles Include="stylecop.json" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="All" />
   </ItemGroup>
 
   <Target Name="OpenAPI" AfterTargets="Build">
