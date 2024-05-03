@@ -4,6 +4,8 @@
 
 This starter kit is a boilerplate based on the https://github.com/Azure-Samples/ms-identity-ciam-javascript-tutorial/tree/main/2-Authorization/1-call-api-react. It demonstrates how to build a web application with a React SPA (Single Page Application) client and a .NET 8 backend, leveraging Azure AD and MSAL for authentication. For detailed guidance on configuring Azure AD and MSAL, please refer to the [there](https://github.com/Azure-Samples/ms-identity-ciam-javascript-tutorial/tree/main/2-Authorization/1-call-api-react).
 
+![app screenshot](docs/app-screenshot.png)
+
 # Scenario
 1. The client **React SPA** uses the to sign-in a user and obtain a JWT ID Token from Azure AD for Customers.
 2. The **ID Token** proves that the user has successfully authenticated against Azure AD for Customers.
