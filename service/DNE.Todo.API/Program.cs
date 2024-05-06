@@ -11,8 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<ClaimSettings>(
     builder.Configuration.GetSection("AzureAd:ClaimSettings"));
 
-builder.Services.AddHttpContextAccessor();
-
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
@@ -69,5 +67,7 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.MapControllers();
+
+app.MapFallbackToFile("/index.html");
 
 app.Run();
