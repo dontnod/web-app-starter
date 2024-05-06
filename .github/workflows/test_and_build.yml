@@ -87,28 +87,28 @@ jobs:
 
     - name: Restore dependencies
       working-directory: ./client
-      run: yarn install --immutable
+      run: npm ci
 
     - name: Generate API
       working-directory: ./client
-      run: yarn api:generate ../openapi.json   
+      run: npm run api:generate ../openapi.json   
 
     - name: Generate Router
       working-directory: ./client
-      run: yarn router:generate
+      run: npm run router:generate
 
     - name: Type check
       working-directory: ./client
-      run: yarn type-check
+      run: npm run type-check
 
     - name: Check lint
       working-directory: ./client
-      run: yarn lint
+      run: npm run lint
 
     - name: Run tests
       working-directory: ./client
-      run: yarn test --run
+      run: npm run test --run
 
     - name: Build
       working-directory: ./client
-      run: yarn build
+      run: npm run build

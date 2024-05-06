@@ -17,12 +17,10 @@ RUN apt-get update \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false\
   && mkdir -p /workspace
 
-# Conditionally install Node.js and Yarn based on the build argument
+# Conditionally install Node.js based on the build argument
 RUN if [ "$NODE_VERSION" != "none" ]; then \
   curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-  apt-get install -y nodejs && \
-  corepack enable && \
-  yarn set version stable; \
+  apt-get install -y nodejs; \
   fi
 
 ## ---------------------------------------------------------------------------------- ##
@@ -38,7 +36,7 @@ COPY service/ service/
 COPY web-app-starter.sln README.md ./
 
 # Install Client Dependencies
-RUN cd client && yarn install
+RUN cd client && npm ci
 
 # Install Dot net Dependencies
 RUN dotnet restore
