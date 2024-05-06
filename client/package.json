@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "npm run api:generate:dev && vite",
     "type-check": "tsc --pretty --noEmit",
-    "build": "npm run api:generate:release && vite build",
+    "build": "vite build",
     "router:generate": "tsr generate",
     "api:generate:dev": "openapi-typescript ../service/DNE.Todo.API/bin/Debug/net8.0/openapi.json -o src/api/todo-schema.d.ts",
     "api:generate:release": "openapi-typescript ../service/DNE.Todo.API/bin/Release/net8.0/openapi.json -o src/api/todo-schema.d.ts",

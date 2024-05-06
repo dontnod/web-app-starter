@@ -38,6 +38,11 @@
     <Exec Command="dotnet swagger tofile --output openapi.json $(TargetPath) v1" WorkingDirectory="$(TargetDir)" />
   </Target>
 
+  <Target Name="Generate Client type definition" AfterTargets="Build" Condition="$(Configuration)=='Release'">
+    <Exec Command="npm ci" Condition="'$(RestorePackagesWithLockFile)' != 'true'" WorkingDirectory="$(MSBuildProjectDirectory)/../../client" />
+    <Exec Command="npm run api:generate $(TargetDir)/openapi.json" Condition="'$(RestorePackagesWithLockFile)' != 'true'" WorkingDirectory="$(MSBuildProjectDirectory)/../../client" />
+  </Target>
+
   <ItemGroup>
     <ProjectReference Include="..\..\client\client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
