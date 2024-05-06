@@ -33,7 +33,7 @@ WORKDIR /workspace
 # Copy source
 COPY client/ client/
 COPY service/ service/
-COPY web-app-starter.sln README.md ./
+COPY WebAppStarter.sln README.md ./
 
 # Install Client Dependencies
 RUN cd client && npm ci
