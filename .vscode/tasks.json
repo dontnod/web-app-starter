@@ -3,7 +3,7 @@
     "tasks": [
         {
             "label": "generateClientApi",
-            "command": "yarn",
+            "command": "npm run",
             "type": "process",
             "args": [
                 "api:generate:dev"
