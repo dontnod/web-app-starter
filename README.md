@@ -13,7 +13,7 @@ This starter kit is a boilerplate based on the https://github.com/Azure-Samples/
 
 # Prerequisites
 - Either [Visual Studio](https://visualstudio.microsoft.com/downloads/) or Visual Studio Code and [.NET Core SDK](https://www.microsoft.com/net/learn/get-started)
-- [Node.js](https://nodejs.org/en/download/current) and [Yarn](https://yarnpkg.com/getting-started/install).
+- [Node.js](https://nodejs.org/en/download/current).
 - An Azure AD tenant.
 
 # Setup the starter
