@@ -49,7 +49,19 @@ RUN dotnet tool install --global dotnet-ef
 ## ---------------------------------------------------------------------------------- ##
 FROM build-base-with-dependencies as prod-build
 
+ARG VITE_AZURE_CLIENT_ID
+ARG VITE_AZURE_AUTHORITY
+ARG VITE_TODO_API_ENDPOINT_URL
+ARG VITE_TODO_API_SCOPES_READ
+ARG VITE_TODO_API_SCOPES_WRITE
+
 WORKDIR /workspace
+
+ENV VITE_AZURE_CLIENT_ID=${VITE_AZURE_CLIENT_ID}
+ENV VITE_AZURE_AUTHORITY=${VITE_AZURE_AUTHORITY}
+ENV VITE_TODO_API_ENDPOINT_URL=${VITE_TODO_API_ENDPOINT_URL}
+ENV VITE_TODO_API_SCOPES_READ=${VITE_TODO_API_SCOPES_READ}
+ENV VITE_TODO_API_SCOPES_WRITE=${VITE_TODO_API_SCOPES_WRITE}
 
 # Build and publish a release
 RUN dotnet publish -c Release -o out
