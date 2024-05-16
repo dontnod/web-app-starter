@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import * as GetTodoList from './use-get-todo-list'
 import * as GetTodo from './use-get-todo'
-import { CreateTodoDto, Todo, addTodo } from '@/api/todo'
+import { CreateTodoDto, TodoItem, addTodo } from '@/api/todo'
 
 export interface UseAddTodoOptions {
-  onSuccess?: (addedTodo: Todo) => void
+  onSuccess?: (addedTodo: TodoItem) => void
   onError?: (error: Error) => void
 }
 
@@ -20,13 +20,13 @@ export function useAddTodo({ onSuccess, onError }: UseAddTodoOptions) {
       await queryClient.cancelQueries({ queryKey: GetTodoList.getQueryKey() })
 
       // Snapshot the previous value
-      const previousTodoList = queryClient.getQueryData<Todo[]>(GetTodoList.getQueryKey())
+      const previousTodoList = queryClient.getQueryData<TodoItem[]>(GetTodoList.getQueryKey())
 
       // Makes a guess about the next todo id
       const nextId = (previousTodoList?.at(-1)?.id ?? 0) + 1
 
       // Optimistically update to the new value
-      queryClient.setQueryData(GetTodoList.getQueryKey(), (old: Todo[]) => [
+      queryClient.setQueryData(GetTodoList.getQueryKey(), (old: TodoItem[]) => [
         ...old,
         { id: nextId, ...newTodo },
       ])

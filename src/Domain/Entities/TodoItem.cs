@@ -1,13 +1,11 @@
-﻿namespace TodoApi.Models;
+﻿namespace WebAppStarter.Domain.Entities;
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using WebAppStarter.Domain.Common;
 
-public record ToDo
+public class TodoItem : BaseEntity
 {
-    [Required]
-    public int Id { get; set; }
-
     [Required]
     public Guid Owner { get; set; }
 

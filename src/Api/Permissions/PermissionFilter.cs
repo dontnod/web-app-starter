@@ -1,7 +1,9 @@
+namespace WebAppStarter.Api.Permissions;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
-using TodoApi.Models;
+using WebAppStarter.Api.Models;
 
 /// <summary>
 /// An abstract authorization filter that validates user access based on configured scopes and application permissions.
@@ -22,6 +24,7 @@ public abstract class PermissionFilter(IConfiguration configuration, IOptions<Cl
         var hasValidScope = requiredScopes?.Any(scope =>
             context.HttpContext.User.Claims.Any(c => c.Type == claimSettings.Value.ScopeClaimType && c.Value.Contains(scope))) ?? false;
 
+        // TODO: replace claimSettings.Value.RoleClaimType with ClaimTypes....
         var hasValidPermission = requiredPermissions?.Any(permission =>
             context.HttpContext.User.Claims.Any(c => c.Type == claimSettings.Value.RoleClaimType && c.Value.Contains(permission))) ?? false;
 

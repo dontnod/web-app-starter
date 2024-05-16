@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import * as GetTodoList from './use-get-todo-list'
-import { Todo, deleteTodo } from '@/api/todo'
+import { TodoItem, deleteTodo } from '@/api/todo'
 import { produce } from 'immer'
 
 export interface UseAddTodoOptions {
@@ -21,10 +21,10 @@ export function useDeleteTodo({ onSuccess, onError }: UseAddTodoOptions) {
       await queryClient.cancelQueries({ queryKey: GetTodoList.getQueryKey() })
 
       // Snapshot the previous value
-      const previousTodoList = queryClient.getQueryData<Todo[]>(GetTodoList.getQueryKey())
+      const previousTodoList = queryClient.getQueryData<TodoItem[]>(GetTodoList.getQueryKey())
 
       // Optimistically delete the value
-      queryClient.setQueryData<Todo[]>(
+      queryClient.setQueryData<TodoItem[]>(
         GetTodoList.getQueryKey(),
         produce((draft) => {
           const todoIndex = draft?.findIndex((todo) => todo.id === deletedTodoId)

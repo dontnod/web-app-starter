@@ -22,11 +22,11 @@
             }
         },
         {
-            "name": "Todo Api Launch",
+            "name": "Api Launch",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/Api/bin/Debug/net8.0/DNE.Todo.Api.dll",
+            "program": "${workspaceFolder}/src/Api/bin/Debug/net8.0/WebAppStarter.Api.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/Api",
             "stopAtEntry": false,

@@ -1,4 +1,4 @@
-namespace TodoApi.Models;
+namespace WebAppStarter.Api.Models;
 
 public class ClaimSettings
 {

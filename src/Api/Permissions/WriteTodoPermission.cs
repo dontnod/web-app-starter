@@ -1,9 +1,9 @@
-namespace TodoApi.Permissions;
+namespace WebAppStarter.Api.Permissions;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using TodoApi.Models;
+using WebAppStarter.Api.Models;
 
 #pragma warning disable SA1402 // File may only contain a single type
 #pragma warning disable SA1649 // File name should match first type name

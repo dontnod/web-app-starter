@@ -1,59 +1,29 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Web;
-using TodoApi.Context;
-using TodoApi.Models;
-using TodoApi.Repositories;
+using WebAppStarter.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.Configure<ClaimSettings>(
-    builder.Configuration.GetSection("AzureAd:ClaimSettings"));
+// Setup Application services
+builder.Services.AddApplicationServices();
 
-// Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+// Setup Infrastructures services
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
-builder.Services.AddDbContext<ToDoContext>(options =>
-{
-    options.UseInMemoryDatabase("ToDos");
-});
-
-builder.Services.AddScoped<IToDoRepository, ToDoRepository>();
-
-builder.Services.Configure<RouteOptions>(options =>
-{
-    options.LowercaseUrls = true;
-    options.LowercaseQueryStrings = true;
-});
-
-builder.Services.AddControllers();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.EnableAnnotations();
-    c.DescribeAllParametersInCamelCase();
-});
-
-// Allowing CORS for all domains and HTTP methods for the purpose of the sample
-// In production, modify this with the actual domains and HTTP methods you want to allow
-builder.Services.AddCors(o => o.AddPolicy("development", builder =>
-{
-    builder.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader();
-}));
+// Setup Api services
+builder.Services.AddApiServices(builder.Configuration);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    // Ensure database is initialized
+    await app.InitialiseDatabaseAsync();
+
+    // Add swagger
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    // Setup cors
     app.UseCors("development");
 }
 else
@@ -65,9 +35,8 @@ app.UseAuthorization();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
+app.MapFallbackToFile("/index.html");
 
 app.MapControllers();
-
-app.MapFallbackToFile("/index.html");
 
 app.Run();

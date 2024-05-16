@@ -1,4 +1,4 @@
-namespace TodoApi.Models;
+namespace WebAppStarter.Models;
 
 using System.ComponentModel.DataAnnotations;
 
