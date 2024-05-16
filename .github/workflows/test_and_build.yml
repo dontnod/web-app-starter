@@ -86,29 +86,29 @@ jobs:
         node-version: 20.x
 
     - name: Restore dependencies
-      working-directory: ./client
+      working-directory: ./src/Client
       run: npm ci
 
     - name: Generate API
-      working-directory: ./client
+      working-directory: ./src/Client
       run: npm run api:generate ../openapi.json   
 
     - name: Generate Router
-      working-directory: ./client
+      working-directory: ./src/Client
       run: npm run router:generate
 
     - name: Type check
-      working-directory: ./client
+      working-directory: ./src/Client
       run: npm run type-check
 
     - name: Check lint
-      working-directory: ./client
+      working-directory: ./src/Client
       run: npm run lint
 
     - name: Run tests
-      working-directory: ./client
+      working-directory: ./src/Client
       run: npm run test --run
 
     - name: Build
-      working-directory: ./client
+      working-directory: ./src/Client
       run: npm run build
