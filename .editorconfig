@@ -18,6 +18,9 @@ dotnet_diagnostic.SA1633.severity = silent
 # SA1600: Elements should be documented
 dotnet_diagnostic.SA1600.severity = silent
 
+# SA0001: XML comment analysis
+dotnet_diagnostic.SA0001.severity = none
+
 # IDE0005: Using directive is unnecessary.
 dotnet_diagnostic.IDE0005.severity = warning
 

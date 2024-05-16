@@ -12,22 +12,23 @@
                 "vite",
             ],
             "type": "node",
-            "cwd": "${workspaceFolder}/client",
+            "cwd": "${workspaceFolder}/src/Client",
             "preLaunchTask": "generateClientApi",
             "serverReadyAction": {
                 "action": "debugWithChrome",
+                "webRoot": "${workspaceFolder}/src/Client",
                 "pattern": "Local:.*http://localhost:([0-9]+)/",
                 "uriFormat": "http://localhost:%s"
             }
         },
         {
-            "name": "Todo Service Launch",
+            "name": "Todo Api Launch",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/service/DNE.Todo.API/bin/Debug/net8.0/DNE.Todo.API.dll",
+            "program": "${workspaceFolder}/src/Api/bin/Debug/net8.0/DNE.Todo.Api.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/service/DNE.Todo.API",
+            "cwd": "${workspaceFolder}/src/Api",
             "stopAtEntry": false,
             // "serverReadyAction": {
             //     "action": "openExternally",

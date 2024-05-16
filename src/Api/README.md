@@ -115,7 +115,7 @@ To install project dependencies, run the following command:
 dotnet restore
 
 # Restore the tools
-cd service/DNE.Todo.API 
+cd src/Api
 dotnet tool restore
 ```
 
@@ -123,10 +123,10 @@ dotnet tool restore
 The Client ID and the Tenant ID need to be set as user secrets in order to use the Azure ad for the authentication / authorization
 ```sh
 # Client ID
-dotnet user-secrets set "AzureAd:ClientId" "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaa" --project "service/DNE.Todo.API"
+dotnet user-secrets set "AzureAd:ClientId" "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaa" --project "src/Api"
 
 # Tenant ID
-dotnet user-secrets set "AzureAd:TenantId" "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbb" --project "service/DNE.Todo.API"
+dotnet user-secrets set "AzureAd:TenantId" "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbb" --project "src/Api"
 ```
 
 ### App settings

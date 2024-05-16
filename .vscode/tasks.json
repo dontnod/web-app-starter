@@ -3,13 +3,10 @@
     "tasks": [
         {
             "label": "generateClientApi",
-            "command": "npm run",
-            "type": "process",
-            "args": [
-                "api:generate:dev"
-            ],
+            "script": "api:generate:dev",
+            "type": "npm",
             "options": {
-                "cwd": "${workspaceFolder}/client",
+                "cwd": "${workspaceFolder}/src/Client",
             }
         },
         {
@@ -18,7 +15,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/service/DNE.Todo.API/DNE.Todo.API.csproj",
+                "${workspaceFolder}/src/Api/Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -30,7 +27,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/service/DNE.Todo.API/DNE.Todo.API.csproj",
+                "${workspaceFolder}/src/Api/Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -43,7 +40,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/service/DNE.Todo.API/DNE.Todo.API.csproj",
+                "${workspaceFolder}/src/Api/Api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

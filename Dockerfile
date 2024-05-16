@@ -31,16 +31,11 @@ FROM build-base as build-base-with-dependencies
 WORKDIR /workspace
 
 # Copy source
-COPY client/ client/
-COPY service/ service/
-COPY WebAppStarter.sln README.md ./
-
-# Install Client Dependencies
-RUN cd client && npm ci
+COPY ./ ./
 
 # Install Dot net Dependencies
 RUN dotnet restore
-RUN cd service/DNE.Todo.API && dotnet tool restore
+RUN cd src/Api && dotnet tool restore
 
 RUN dotnet tool install --global dotnet-ef
 
@@ -74,7 +69,7 @@ WORKDIR /app
 COPY --from=prod-build /workspace/out .
 
 EXPOSE 8080
-ENTRYPOINT ["dotnet", "DNE.Todo.API.dll"]
+ENTRYPOINT ["dotnet", "DNE.Todo.Api.dll"]
 
 ## ---------------------------------------------------------------------------------- ##
 ## -------------------------------- development build ------------------------------- ##

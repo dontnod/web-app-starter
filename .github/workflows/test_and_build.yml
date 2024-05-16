@@ -45,7 +45,7 @@ jobs:
       run: dotnet restore
 
     - name: Restore tool dependencies
-      working-directory: ./service/DNE.Todo.API
+      working-directory: ./src/Api
       run: dotnet tool restore
 
     - name: Test
@@ -58,7 +58,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: openapi.json
-        path: ./service/DNE.Todo.API/bin/Release/net8.0/openapi.json
+        path: ./src/Api/bin/Release/net8.0/openapi.json
 
     - name: Upload .NET artifacts
       uses: actions/upload-artifact@v3

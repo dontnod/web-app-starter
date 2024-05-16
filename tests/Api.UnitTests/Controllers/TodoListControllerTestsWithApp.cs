@@ -41,5 +41,4 @@ public class ToDoListControllerTestsWithApp
         var returnedToDos = Assert.IsType<List<ToDo>>(okResult.Value);
         Assert.Equal(toDos, returnedToDos);
     }
-
 }

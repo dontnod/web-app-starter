@@ -22,7 +22,9 @@ public class WriteTodoPermissionFilter : PermissionFilter
     }
 }
 
-public class WriteTodoPermissionAttribute : TypeFilterAttribute<WriteTodoPermissionFilter> { }
+public class WriteTodoPermissionAttribute : TypeFilterAttribute<WriteTodoPermissionFilter>
+{
+}
 
 #pragma warning restore SA1649 // File name should match first type name
 #pragma warning restore SA1402 // File may only contain a single type

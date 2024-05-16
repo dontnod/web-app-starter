@@ -3,13 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{D34D9A25-2206-4972-BC45-EC8363A695C0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D34D9A25-2206-4972-BC45-EC8363A695C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DNE.Todo.API", "service\DNE.Todo.API\DNE.Todo.API.csproj", "{24717492-0735-485A-A0A9-DF837633E3DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\Api\Api.csproj", "{24717492-0735-485A-A0A9-DF837633E3DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DNE.Todo.Test", "service\DNE.Todo.Test\DNE.Todo.Test.csproj", "{8A92DCE0-94D5-494E-BCCE-AD2599ECAFBB}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Client", "src\Client\client.esproj", "{0261127C-E97A-4350-AFFD-FBFF75F12AD3}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "client", "client\client.esproj", "{0261127C-E97A-4350-AFFD-FBFF75F12AD3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solutions Items", "Solutions Items", "{272BAA60-C02E-4786-B5DE-7622C493F27D}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		README.md = README.md
+		global.json = global.json
+		.gitignore = .gitignore
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{41D3ECC0-AB64-4994-8B5E-73A7876C4F5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.UnitTests", "tests\Api.UnitTests\Api.UnitTests.csproj", "{31BDF5B0-70C7-4802-B0C8-63A88C0DFD67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,23 +33,24 @@ Global
 		{24717492-0735-485A-A0A9-DF837633E3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24717492-0735-485A-A0A9-DF837633E3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24717492-0735-485A-A0A9-DF837633E3DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A92DCE0-94D5-494E-BCCE-AD2599ECAFBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A92DCE0-94D5-494E-BCCE-AD2599ECAFBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A92DCE0-94D5-494E-BCCE-AD2599ECAFBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A92DCE0-94D5-494E-BCCE-AD2599ECAFBB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0261127C-E97A-4350-AFFD-FBFF75F12AD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0261127C-E97A-4350-AFFD-FBFF75F12AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0261127C-E97A-4350-AFFD-FBFF75F12AD3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{0261127C-E97A-4350-AFFD-FBFF75F12AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0261127C-E97A-4350-AFFD-FBFF75F12AD3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0261127C-E97A-4350-AFFD-FBFF75F12AD3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{31BDF5B0-70C7-4802-B0C8-63A88C0DFD67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31BDF5B0-70C7-4802-B0C8-63A88C0DFD67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31BDF5B0-70C7-4802-B0C8-63A88C0DFD67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31BDF5B0-70C7-4802-B0C8-63A88C0DFD67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{24717492-0735-485A-A0A9-DF837633E3DD} = {D34D9A25-2206-4972-BC45-EC8363A695C0}
-		{8A92DCE0-94D5-494E-BCCE-AD2599ECAFBB} = {D34D9A25-2206-4972-BC45-EC8363A695C0}
+		{0261127C-E97A-4350-AFFD-FBFF75F12AD3} = {D34D9A25-2206-4972-BC45-EC8363A695C0}
+		{31BDF5B0-70C7-4802-B0C8-63A88C0DFD67} = {41D3ECC0-AB64-4994-8B5E-73A7876C4F5F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A727A511-A414-4DD0-A3C6-3DCCCBB5C3FB}

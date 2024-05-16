@@ -1,2 +1,11 @@
-.env*
-wwwroot/
+.env
+.git
+*.md
+.mono/
+.devcontainer/
+.vscode/
+node_modules/
+obj/
+bin/
+Dockerfile
+docker-compose.yml
