@@ -91,7 +91,7 @@ jobs:
 
     - name: Generate API
       working-directory: ./src/Client
-      run: npm run api:generate ../openapi.json   
+      run: npm run api:generate ../../openapi.json   
 
     - name: Generate Router
       working-directory: ./src/Client
