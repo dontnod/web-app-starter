@@ -4,8 +4,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using WebAppStarter.Domain.Common;
 
-// TODO: inherit from BaseAuditableEntity
-public class TodoItem : BaseEntity
+public class TodoItem : BaseAuditableEntity
 {
     [Required]
     public Guid Owner { get; set; }

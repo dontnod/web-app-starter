@@ -2,18 +2,18 @@
 
 public static class TestDatabaseFactory
 {
-    public static async Task<ITestDatabase> CreateAsync()
-    {
-#if (USE_SQL_LITE)
+        public static async Task<ITestDatabase> CreateAsync()
+        {
+#if USE_SQL_LITE
         var database = new SqliteTestDatabase();
 #else
 
-        var database = new InMemoryTestDatabase();
+                var database = new InMemoryTestDatabase();
 
 #endif
 
-        await database.InitialiseAsync();
+                await database.InitialiseAsync();
 
-        return database;
-    }
+                return database;
+        }
 }
