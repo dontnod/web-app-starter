@@ -155,7 +155,7 @@ A static code analysis tool that helps enforce coding standards for the frontend
 A comprehensive suite of React UI components that enhance UI development efficiency, similar to Bootstrap.
 
 ## openapi-fetch / openapi-typescript ([documentation](https://github.com/drwpow/openapi-typescript))
-Type-safe fetch client that generates TypeScript types from static [OpenAPI](https://spec.openapis.org/oas/latest.html) schemas using Node.js. It ensures type safety when consuming the .NET API. The  **openapi.json** file is created during the build phase of `DNE.Todo.Api` and is located at `/src/Api/bin/Debug/net8.0/openapi.json`. The `npm run api:generate:dev` command then generates `src/api/todo-schema.d.ts` from this file.
+Type-safe fetch client that generates TypeScript types from static [OpenAPI](https://spec.openapis.org/oas/latest.html) schemas using Node.js. It ensures type safety when consuming the .NET API. The  **openapi.json** file is created during the build phase of `WebAppStarter.Api` and is located at `/src/Api/bin/Debug/net8.0/openapi.json`. The `npm run api:generate:dev` command then generates `src/api/todo-schema.d.ts` from this file.
 
 ## react-hook-form ([documentation](https://react-hook-form.com/))
 Provides efficient and flexible form management in React, supporting form validation, nested forms, array forms, and more.
@@ -210,7 +210,7 @@ This directory manages all interactions with the API, including data fetching an
 
 - [src/api/http-client.ts](src/api/http-client.ts): Provides a `getHttpClient` function that creates a client for consuming the API with type safety, leveraging the generated types from `src/api/todo-schema.d.ts`. It includes **middlewares** to append the user's JWT token to every request.
 
-- `src/api/todo-schema.d.ts`: Contains the generated type definitions for the `DNE.Todo.Api`, created by the  `npm run generated-api` command.
+- `src/api/todo-schema.d.ts`: Contains the generated type definitions for the `WebAppStarter.Api`, created by the  `npm run generated-api` command.
 
 - [src/api/query-client.ts](src/api/query-client.ts): An instance of `@tanstack/react-query` used for handling queries and mutations throughout the application.
 

@@ -1,4 +1,4 @@
-import { Todo } from '@/api/todo'
+import { TodoItem } from '@/api/todo'
 import { TodoForm } from '@/components'
 import { useEditTodo, useGetTodo } from '@/features/todo'
 import { createFileRoute } from '@tanstack/react-router'
@@ -25,7 +25,7 @@ function EditTodoComponent() {
   const todoQuery = useGetTodo(parseFloat(params.id))
 
   const handleFormSubmitted = (todo: TodoForm) => {
-    addTodoMutation.mutate(todo as Todo)
+    addTodoMutation.mutate(todo as TodoItem)
   }
 
   return (

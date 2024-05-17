@@ -2,8 +2,9 @@ import { CONFIG } from '@/config/config'
 import { getHttpClient } from './http-client'
 import { components } from './todo-schema'
 
-export type Todo = components['schemas']['ToDo']
-export type CreateTodoDto = components['schemas']['CreateToDoDto']
+export type TodoItem = components['schemas']['TodoItem']
+export type CreateTodoItemCommand = components['schemas']['CreateTodoItemCommand']
+export type UpdateTodoItemCommand = components['schemas']['UpdateTodoItemCommand']
 
 export async function getTodoList(signal: AbortSignal) {
   const httpClient = getHttpClient(CONFIG.todoApi.scopes.read, { signal })
@@ -23,7 +24,7 @@ export async function getTodo(todoId: number, signal: AbortSignal) {
   return data!
 }
 
-export async function addTodo(todo: CreateTodoDto) {
+export async function addTodo(todo: CreateTodoItemCommand) {
   const httpClient = getHttpClient(CONFIG.todoApi.scopes.write, {})
 
   const { data } = await httpClient.POST('/api/todolist', { body: todo })
@@ -31,7 +32,7 @@ export async function addTodo(todo: CreateTodoDto) {
   return data!
 }
 
-export async function editTodo(todo: Todo) {
+export async function editTodo(todo: UpdateTodoItemCommand) {
   const httpClient = getHttpClient(CONFIG.todoApi.scopes.write, {})
 
   const { data } = await httpClient.PUT('/api/todolist/{id}', {

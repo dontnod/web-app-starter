@@ -69,7 +69,7 @@ WORKDIR /app
 COPY --from=prod-build /workspace/out .
 
 EXPOSE 8080
-ENTRYPOINT ["dotnet", "DNE.Todo.Api.dll"]
+ENTRYPOINT ["dotnet", "WebAppStarter.Api.dll"]
 
 ## ---------------------------------------------------------------------------------- ##
 ## -------------------------------- development build ------------------------------- ##

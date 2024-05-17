@@ -1,19 +1,21 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import * as GetTodoList from './use-get-todo-list'
 import * as GetTodo from './use-get-todo'
-import { Todo, editTodo } from '@/api/todo'
+import { TodoItem, UpdateTodoItemCommand, editTodo } from '@/api/todo'
 import { produce } from 'immer'
 
 export interface UseEditTodoOptions {
-  onSuccess?: (editedTodo: Todo) => void
+  onSuccess?: (editedTodo: TodoItem) => void
   onError?: (error: Error) => void
 }
 
 export function useEditTodo({ onSuccess, onError }: UseEditTodoOptions) {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (editedTodo: Todo) => {
-      return editTodo(editedTodo)
+    mutationFn: async (editedTodo: UpdateTodoItemCommand) => {
+      const updatedTodo = await editTodo(editedTodo)
+
+      return { ...editedTodo, ...updatedTodo }
     },
     onMutate: async (editedTodo) => {
       // Cancel any outgoing refetches
@@ -21,21 +23,24 @@ export function useEditTodo({ onSuccess, onError }: UseEditTodoOptions) {
       await queryClient.cancelQueries({ queryKey: GetTodoList.getQueryKey() })
 
       // Snapshot the previous value
-      const previousTodoList = queryClient.getQueryData<Todo[]>(GetTodoList.getQueryKey())
-      const previousTodo = queryClient.getQueryData<Todo>(GetTodo.getQueryKey(editedTodo.id))
+      const previousTodoList = queryClient.getQueryData<TodoItem[]>(GetTodoList.getQueryKey())
+      const previousTodo = queryClient.getQueryData<TodoItem>(GetTodo.getQueryKey(editedTodo.id))
 
       // Optimistically update to the new value
-      queryClient.setQueryData<Todo[]>(
+      queryClient.setQueryData<TodoItem[]>(
         GetTodoList.getQueryKey(),
         produce((draft) => {
           const todoIndex = draft?.findIndex((todo) => todo.id === editedTodo.id)
           if (draft === undefined || todoIndex === undefined || todoIndex === -1) {
             return
           }
-          draft[todoIndex] = editedTodo
+          draft[todoIndex] = { ...draft[todoIndex], ...editedTodo }
         })
       )
-      queryClient.setQueryData<Todo>(GetTodo.getQueryKey(editedTodo.id), editedTodo)
+      queryClient.setQueryData<UpdateTodoItemCommand>(
+        GetTodo.getQueryKey(editedTodo.id),
+        editedTodo
+      )
 
       // Return a context object with the snapshotted value
       return { previousTodoList, previousTodo }

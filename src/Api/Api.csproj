@@ -4,13 +4,16 @@
     <TargetFramework>net8.0</TargetFramework>
     <UserSecretsId>dne-todo-api-2f979706-5df6-465d-af50-c3917e0e8925</UserSecretsId>
 
-    <RootNamespace>DNE.Todo.Api</RootNamespace>
-    <AssemblyName>DNE.Todo.Api</AssemblyName>
+    <RootNamespace>WebAppStarter.Api</RootNamespace>
+    <AssemblyName>WebAppStarter.Api</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.Result" />
+    <PackageReference Include="Ardalis.Result.AspNetCore" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect"  />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,8 +27,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"  />
-    <PackageReference Include="DotSwashbuckle.AspNetCore"  />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="DotSwashbuckle.AspNetCore" />
     <PackageReference Include="DotSwashbuckle.AspNetCore.Annotations" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" />
   </ItemGroup>
@@ -41,6 +44,8 @@
   </Target>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Client\client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
