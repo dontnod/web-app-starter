@@ -1,5 +1,6 @@
 ﻿namespace WebAppStarter.Infrastructure.Data;
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebAppStarter.Domain.Entities;
 
@@ -8,7 +9,6 @@ public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitial
 #if USE_SQL_LITE
     public async Task InitialiseAsync()
     {
-
         try
         {
             await context.Database.MigrateAsync();
@@ -18,7 +18,6 @@ public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitial
             logger.LogError(ex, "An error occurred while initialising the database.");
             throw;
         }
-
     }
 #endif
 
