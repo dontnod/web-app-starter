@@ -33,11 +33,7 @@ public class CustomWebApplicationFactory(DbConnection connection) : WebApplicati
                 .AddDbContext<ApplicationDbContext>((sp, options) =>
                 {
                     options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
-#if USE_SQL_LITE
                     options.UseSqlite(connection);
-#else
-                    options.UseInMemoryDatabase("AppDatabase");
-#endif
                 });
         });
     }

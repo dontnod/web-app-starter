@@ -6,7 +6,6 @@ using WebAppStarter.Domain.Entities;
 
 public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, ApplicationDbContext context)
 {
-#if USE_SQL_LITE
     public async Task InitialiseAsync()
     {
         try
@@ -19,7 +18,6 @@ public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitial
             throw;
         }
     }
-#endif
 
     public async Task SeedAsync()
     {

@@ -5,8 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Company>Don't Nod</Company>
-    <!-- Uncomment the following line to use InMemoryDatabase -->
-    <DefineConstants>$(DefineConstants);USE_SQL_LITE</DefineConstants>
     <Product />
   </PropertyGroup>
 </Project>

@@ -10,9 +10,8 @@ public static class ApplicationDbContextInitialiserExtensions
         using var scope = app.Services.CreateScope();
 
         var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
-#if USE_SQL_LITE
+
         await initialiser.InitialiseAsync();
-#endif
 
         await initialiser.SeedAsync();
     }

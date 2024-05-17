@@ -22,11 +22,7 @@ public static class DependencyInjection
         {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
 
-#if USE_SQL_LITE
             options.UseSqlite(connectionString);
-#else
-            options.UseInMemoryDatabase("AppDatabase");
-#endif
         });
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
