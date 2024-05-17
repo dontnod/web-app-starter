@@ -2,6 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 public abstract class BaseEntity
 {
@@ -15,6 +16,7 @@ public abstract class BaseEntity
     public int Id { get; set; }
 
     [NotMapped]
+    [JsonIgnore]
     public IReadOnlyCollection<BaseEvent> DomainEvents => domainEvents.AsReadOnly();
 
     public void AddDomainEvent(BaseEvent domainEvent)

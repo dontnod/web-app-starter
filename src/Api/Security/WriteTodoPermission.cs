@@ -1,4 +1,4 @@
-namespace WebAppStarter.Api.Permissions;
+namespace WebAppStarter.Api.Security;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,18 +11,18 @@ using WebAppStarter.Api.Models;
 /// <summary>
 /// Check that the connected user has the right to access the todo api in read mode.
 /// </summary>
-public class ReadTodoPermissionFilter : PermissionFilter
+public class WriteTodoPermissionFilter : PermissionFilter
 {
-    private const string RequiredScopesConfigurationKey = "AzureAD:Scopes:Read";
-    private const string RequiredAppPermissionsConfigurationKey = "AzureAD:AppPermissions:Read";
+    private const string RequiredScopesConfigurationKey = "AzureAD:Scopes:Write";
+    private const string RequiredAppPermissionsConfigurationKey = "AzureAD:AppPermissions:Write";
 
-    public ReadTodoPermissionFilter(IConfiguration configuration, IOptions<ClaimSettings> claimSettings)
+    public WriteTodoPermissionFilter(IConfiguration configuration, IOptions<ClaimSettings> claimSettings)
         : base(configuration, claimSettings, RequiredScopesConfigurationKey, RequiredAppPermissionsConfigurationKey)
     {
     }
 }
 
-public class ReadTodoPermissionAttribute : TypeFilterAttribute<ReadTodoPermissionFilter>
+public class WriteTodoPermissionAttribute : TypeFilterAttribute<WriteTodoPermissionFilter>
 {
 }
 

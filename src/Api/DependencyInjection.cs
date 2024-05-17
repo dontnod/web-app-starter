@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using WebAppStarter.Api.Infrastructure;
 using WebAppStarter.Api.Models;
+using WebAppStarter.Api.Security;
 using WebAppStarter.Api.Services;
 using WebAppStarter.Application.Common.Interfaces;
 using WebAppStarter.Infrastructure.Data;
@@ -45,6 +46,7 @@ public static class DependencyInjection
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAppStarter API", Version = "v1" });
 
+            c.OperationFilter<SecurityRequirementsOperationFilter>();
             c.EnableAnnotations();
             c.DescribeAllParametersInCamelCase();
 
@@ -55,16 +57,6 @@ public static class DependencyInjection
                 BearerFormat = "JWT",
                 Description = "JWT Authorization header using the Bearer scheme.",
             });
-            c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearerAuth" },
-                        },
-                        new string[] { }
-                    },
-                });
         });
 
         // Allowing CORS for all domains and HTTP methods for the purpose of the sample

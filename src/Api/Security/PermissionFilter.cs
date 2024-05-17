@@ -1,4 +1,4 @@
-namespace WebAppStarter.Api.Permissions;
+namespace WebAppStarter.Api.Security;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
