@@ -22,7 +22,10 @@ public static class DependencyInjection
             options.LowercaseQueryStrings = true;
         });
 
-        services.AddControllers();
+        services.AddControllers(options =>
+        {
+            options.Conventions.Add(new GlobalProducesResponseTypeConvention());
+        });
 
         services.AddDatabaseDeveloperPageExceptionFilter();
 

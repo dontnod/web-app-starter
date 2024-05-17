@@ -2,6 +2,7 @@
 
 using FluentValidation;
 using MediatR;
+using ValidationException = WebAppStarter.Application.Common.Exceptions.ValidationException;
 
 public class ValidationBehaviour<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators) : IPipelineBehavior<TRequest, TResponse>
      where TRequest : notnull

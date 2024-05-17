@@ -25,9 +25,6 @@ public class TodoListController(IMediator mediator) : ControllerBase
     [ReadTodoPermission]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType(typeof(List<TodoItem>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<List<TodoItem>>> GetAllAsync()
     {
         return (await mediator.Send(new GetUserTodoItemsQuery())).ToActionResult(this);
@@ -35,12 +32,8 @@ public class TodoListController(IMediator mediator) : ControllerBase
 
     [HttpGet("{id}")]
     [ReadTodoPermission]
-    [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType(typeof(List<TodoItem>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<TodoItem>> GetByIdAsync(int id)
     {
         return (await mediator.Send(new GetTodoItemByIdQuery(id))).ToActionResult(this);
@@ -51,9 +44,6 @@ public class TodoListController(IMediator mediator) : ControllerBase
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType(typeof(TodoItem), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<TodoItem>> UpdateAsync(int id, [FromBody][Required] UpdateTodoItemCommand command)
     {
         if (id != command.Id)
@@ -69,8 +59,6 @@ public class TodoListController(IMediator mediator) : ControllerBase
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<TodoItem>> CreateAsync([FromBody][Required] CreateTodoItemCommand command)
     {
         return (await mediator.Send(command)).ToActionResult(this);
@@ -81,9 +69,6 @@ public class TodoListController(IMediator mediator) : ControllerBase
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType(typeof(TodoItem), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<TodoItem>> DeleteAsync(int id)
     {
         return (await mediator.Send(new DeleteTodoItemCommand(id))).ToActionResult(this);

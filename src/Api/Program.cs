@@ -31,6 +31,8 @@ else
     app.UseHttpsRedirection();
 }
 
+app.UseExceptionHandler(options => { });
+
 app.UseAuthorization();
 
 app.UseDefaultFiles();

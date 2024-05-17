@@ -2,6 +2,7 @@ namespace WebAppStarter.Api.Security;
 
 using DotSwashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
 /// <summary>
@@ -29,8 +30,28 @@ public class SecurityRequirementsOperationFilter : IOperationFilter
 
         if (requiredScopes.Any())
         {
-            operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
-            operation.Responses.Add("403", new OpenApiResponse { Description = "Forbidden" });
+            operation.Responses.Add("401", new OpenApiResponse
+            {
+                Description = "Unauthorized",
+                Content = new Dictionary<string, OpenApiMediaType>
+                {
+                    ["application/json"] = new OpenApiMediaType
+                    {
+                        Schema = context.SchemaGenerator.GenerateSchema(typeof(ProblemDetails), context.SchemaRepository),
+                    },
+                },
+            });
+            operation.Responses.Add("403", new OpenApiResponse
+            {
+                Description = "Forbidden",
+                Content = new Dictionary<string, OpenApiMediaType>
+                {
+                    ["application/json"] = new OpenApiMediaType
+                    {
+                        Schema = context.SchemaGenerator.GenerateSchema(typeof(ProblemDetails), context.SchemaRepository),
+                    },
+                },
+            });
 
             // Reference the OAuth2 security scheme (defined in the DependencyInjection -> AddSwagger -> AddSecurityDefinition )
             var oAuthScheme = new OpenApiSecurityScheme
