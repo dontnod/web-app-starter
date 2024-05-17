@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import * as GetTodoList from './use-get-todo-list'
 import * as GetTodo from './use-get-todo'
-import { CreateTodoDto, TodoItem, addTodo } from '@/api/todo'
+import { CreateTodoItemCommand, TodoItem, addTodo } from '@/api/todo'
 
 export interface UseAddTodoOptions {
   onSuccess?: (addedTodo: TodoItem) => void
@@ -11,7 +11,7 @@ export interface UseAddTodoOptions {
 export function useAddTodo({ onSuccess, onError }: UseAddTodoOptions) {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (newTodo: CreateTodoDto) => {
+    mutationFn: (newTodo: CreateTodoItemCommand) => {
       return addTodo(newTodo)
     },
     onMutate: async (newTodo) => {

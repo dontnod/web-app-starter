@@ -33,7 +33,7 @@ public class TodoListController(IMediator mediator) : ControllerBase
     [HttpGet("{id}")]
     [ReadTodoPermission]
     [Produces(MediaTypeNames.Application.Json)]
-    [ProducesResponseType(typeof(List<TodoItem>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(TodoItem), StatusCodes.Status200OK)]
     public async Task<ActionResult<TodoItem>> GetByIdAsync(int id)
     {
         return (await mediator.Send(new GetTodoItemByIdQuery(id))).ToActionResult(this);

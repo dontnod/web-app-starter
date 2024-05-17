@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import * as GetTodoList from './use-get-todo-list'
 import * as GetTodo from './use-get-todo'
-import { TodoItem, editTodo } from '@/api/todo'
+import { TodoItem, UpdateTodoItemCommand, editTodo } from '@/api/todo'
 import { produce } from 'immer'
 
 export interface UseEditTodoOptions {
@@ -12,7 +12,7 @@ export interface UseEditTodoOptions {
 export function useEditTodo({ onSuccess, onError }: UseEditTodoOptions) {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async (editedTodo: TodoItem) => {
+    mutationFn: async (editedTodo: UpdateTodoItemCommand) => {
       const updatedTodo = await editTodo(editedTodo)
 
       return { ...editedTodo, ...updatedTodo }
@@ -34,10 +34,13 @@ export function useEditTodo({ onSuccess, onError }: UseEditTodoOptions) {
           if (draft === undefined || todoIndex === undefined || todoIndex === -1) {
             return
           }
-          draft[todoIndex] = editedTodo
+          draft[todoIndex] = { ...draft[todoIndex], ...editedTodo }
         })
       )
-      queryClient.setQueryData<TodoItem>(GetTodo.getQueryKey(editedTodo.id), editedTodo)
+      queryClient.setQueryData<UpdateTodoItemCommand>(
+        GetTodo.getQueryKey(editedTodo.id),
+        editedTodo
+      )
 
       // Return a context object with the snapshotted value
       return { previousTodoList, previousTodo }
