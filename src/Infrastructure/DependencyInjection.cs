@@ -25,7 +25,7 @@ public static class DependencyInjection
 #if USE_SQL_LITE
             options.UseSqlite(connectionString);
 #else
-            options.UseInMemoryDatabase("ToDos");
+            options.UseInMemoryDatabase("AppDatabase");
 #endif
         });
 

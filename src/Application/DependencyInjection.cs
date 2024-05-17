@@ -1,9 +1,9 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection;
 
 using System.Reflection;
-using CleanArchitecture.Application.Common.Behaviours;
 using FluentValidation;
 using MediatR;
+using WebAppStarter.Application.Common.Behaviours;
 
 public static class DependencyInjection
 {

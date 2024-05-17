@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using WebAppStarter.Domain.Common;
 
+// TODO: inherit from BaseAuditableEntity
 public class TodoItem : BaseEntity
 {
     [Required]

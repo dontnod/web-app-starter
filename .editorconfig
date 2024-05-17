@@ -26,3 +26,6 @@ dotnet_diagnostic.IDE0005.severity = warning
 
 # IDE0052: Remove unread private members
 dotnet_diagnostic.IDE0052.severity = warning
+
+# SA1601: Partial elements should be documented
+dotnet_diagnostic.SA1601.severity = silent

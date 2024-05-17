@@ -1,4 +1,4 @@
-﻿namespace CleanArchitecture.Application.Common.Behaviours;
+﻿namespace WebAppStarter.Application.Common.Behaviours;
 
 using MediatR;
 using Microsoft.Extensions.Logging;

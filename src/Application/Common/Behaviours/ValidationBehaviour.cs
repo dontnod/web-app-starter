@@ -1,4 +1,4 @@
-﻿namespace CleanArchitecture.Application.Common.Behaviours;
+﻿namespace WebAppStarter.Application.Common.Behaviours;
 
 using FluentValidation;
 using MediatR;
@@ -22,6 +22,7 @@ public class ValidationBehaviour<TRequest, TResponse>(IEnumerable<IValidator<TRe
                 .SelectMany(r => r.Errors)
                 .ToList();
 
+            // TODO: Maybe return a Result.Invalid instead of throwing an error
             if (failures.Any())
                 throw new ValidationException(failures);
         }
