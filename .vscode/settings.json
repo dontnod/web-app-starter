@@ -18,6 +18,7 @@
         "typescript"
     ],
     "[csharp]": {
+        "editor.defaultFormatter": "csharpier.csharpier-vscode",
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
             "source.fixAll": "explicit"

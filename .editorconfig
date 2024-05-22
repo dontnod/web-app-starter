@@ -29,3 +29,16 @@ dotnet_diagnostic.IDE0052.severity = warning
 
 # SA1601: Partial elements should be documented
 dotnet_diagnostic.SA1601.severity = silent
+
+#################################################
+## Following one conflits with csharpier ########
+#################################################
+
+# SA1009: Closing parenthesis should be spaced correctly
+dotnet_diagnostic.SA1009.severity = none
+
+# SA1111: Closing parenthesis should be on line of last parameter
+dotnet_diagnostic.SA1111.severity = none
+
+# SA1502: Element should not be on a single line
+dotnet_diagnostic.SA1502.severity = none

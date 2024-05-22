@@ -2,6 +2,12 @@
   "version": 1,
   "isRoot": true,
   "tools": {
+    "csharpier": {
+      "version": "0.28.2",
+      "commands": [
+        "dotnet-csharpier"
+      ]
+    },
     "dotswashbuckle.aspnetcore.cli": {
       "version": "3.0.8",
       "commands": [

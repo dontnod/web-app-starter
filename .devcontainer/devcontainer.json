@@ -26,6 +26,7 @@
 				"ms-dotnettools.csharp",
 				"ms-dotnettools.vscode-dotnet-runtime",
 				"ms-dotnettools.csdevkit",
+				"csharpier.csharpier-vscode",
 				"redhat.vscode-yaml"
 			]
 		}
