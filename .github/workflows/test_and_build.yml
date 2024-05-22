@@ -45,7 +45,6 @@ jobs:
       run: dotnet restore
 
     - name: Restore tool dependencies
-      working-directory: ./src/Api
       run: dotnet tool restore
 
     - name: Test
