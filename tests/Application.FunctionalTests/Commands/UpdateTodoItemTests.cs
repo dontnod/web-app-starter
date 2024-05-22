@@ -24,10 +24,7 @@ public class UpdateTodoItemTests : BaseTestFixture
     {
         var userId = await RunAsDefaultUserAsync();
 
-        var createResult = await SendAsync(new CreateTodoItemCommand
-        {
-            Description = "New Item",
-        });
+        var createResult = await SendAsync(new CreateTodoItemCommand { Description = "New Item", });
 
         var command = new UpdateTodoItemCommand
         {

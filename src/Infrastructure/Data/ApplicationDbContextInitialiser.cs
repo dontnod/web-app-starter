@@ -4,7 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebAppStarter.Domain.Entities;
 
-public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, ApplicationDbContext context)
+public class ApplicationDbContextInitialiser(
+    ILogger<ApplicationDbContextInitialiser> logger,
+    ApplicationDbContext context
+)
 {
     public async Task InitialiseAsync()
     {
@@ -38,12 +41,17 @@ public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitial
         // Seed, if necessary
         if (!context.TodoItems.Any())
         {
-            context.TodoItems.AddRange([
-                new TodoItem { Description = "Make a todo list 📃" },
-                new TodoItem { Description = "Check off the first item ✅" },
-                new TodoItem { Description = "Realise you've already done two things on the list! 🤯" },
-                new TodoItem { Description = "Reward yourself with a nice, long nap 🏆" },
-            ]);
+            context.TodoItems.AddRange(
+                [
+                    new TodoItem { Description = "Make a todo list 📃" },
+                    new TodoItem { Description = "Check off the first item ✅" },
+                    new TodoItem
+                    {
+                        Description = "Realise you've already done two things on the list! 🤯",
+                    },
+                    new TodoItem { Description = "Reward yourself with a nice, long nap 🏆" },
+                ]
+            );
 
             await context.SaveChangesAsync();
         }

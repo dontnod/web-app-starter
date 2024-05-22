@@ -11,10 +11,12 @@ using WebAppStarter.Infrastructure.Data;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApiServices(
+        this IServiceCollection services,
+        IConfiguration configuration
+    )
     {
-        services.Configure<ClaimSettings>(
-            configuration.GetSection("AzureAd:ClaimSettings"));
+        services.Configure<ClaimSettings>(configuration.GetSection("AzureAd:ClaimSettings"));
 
         services.Configure<RouteOptions>(options =>
         {
@@ -33,14 +35,14 @@ public static class DependencyInjection
 
         services.AddHttpContextAccessor();
 
-        services.AddHealthChecks()
-            .AddDbContextCheck<ApplicationDbContext>();
+        services.AddHealthChecks().AddDbContextCheck<ApplicationDbContext>();
 
         services.AddExceptionHandler<CustomExceptionHandler>();
 
         // Customise default API behaviour
         services.Configure<ApiBehaviorOptions>(options =>
-            options.SuppressModelStateInvalidFilter = true);
+            options.SuppressModelStateInvalidFilter = true
+        );
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
@@ -53,23 +55,29 @@ public static class DependencyInjection
             c.EnableAnnotations();
             c.DescribeAllParametersInCamelCase();
 
-            c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
-            {
-                Type = SecuritySchemeType.Http,
-                Scheme = "bearer",
-                BearerFormat = "JWT",
-                Description = "JWT Authorization header using the Bearer scheme.",
-            });
+            c.AddSecurityDefinition(
+                "bearerAuth",
+                new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Description = "JWT Authorization header using the Bearer scheme.",
+                }
+            );
         });
 
         // Allowing CORS for all domains and HTTP methods for the purpose of the sample
         // In production, modify this with the actual domains and HTTP methods you want to allow
-        services.AddCors(o => o.AddPolicy("development", builder =>
-        {
-            builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
-        }));
+        services.AddCors(o =>
+            o.AddPolicy(
+                "development",
+                builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                }
+            )
+        );
 
         return services;
     }

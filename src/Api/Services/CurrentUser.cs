@@ -71,7 +71,8 @@ public class CurrentUser : ICurrentUser
         else
         {
             // alternatively, if an AT contains the roles claim but no scp claim, that indicates it's an app token
-            return user.Claims.Any(c => c.Type == "roles") && !user.Claims.Any(c => c.Type == "scp");
+            return user.Claims.Any(c => c.Type == "roles")
+                && !user.Claims.Any(c => c.Type == "scp");
         }
     }
 }

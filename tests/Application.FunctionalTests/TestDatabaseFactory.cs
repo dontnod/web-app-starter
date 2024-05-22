@@ -2,12 +2,12 @@
 
 public static class TestDatabaseFactory
 {
-        public static async Task<ITestDatabase> CreateAsync()
-        {
-                var database = new SqliteTestDatabase();
+    public static async Task<ITestDatabase> CreateAsync()
+    {
+        var database = new SqliteTestDatabase();
 
-                await database.InitialiseAsync();
+        await database.InitialiseAsync();
 
-                return database;
-        }
+        return database;
+    }
 }

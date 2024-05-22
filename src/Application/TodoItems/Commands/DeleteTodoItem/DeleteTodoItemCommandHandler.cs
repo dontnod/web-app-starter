@@ -7,11 +7,17 @@ using WebAppStarter.Application.Common.Interfaces;
 using WebAppStarter.Domain.Entities;
 using WebAppStarter.Domain.Events;
 
-public class DeleteTodoItemCommandHandler(IApplicationDbContext context, ICurrentUser currentUser) : IRequestHandler<DeleteTodoItemCommand, Result<TodoItem>>
+public class DeleteTodoItemCommandHandler(IApplicationDbContext context, ICurrentUser currentUser)
+    : IRequestHandler<DeleteTodoItemCommand, Result<TodoItem>>
 {
-    public async Task<Result<TodoItem>> Handle(DeleteTodoItemCommand request, CancellationToken cancellationToken)
+    public async Task<Result<TodoItem>> Handle(
+        DeleteTodoItemCommand request,
+        CancellationToken cancellationToken
+    )
     {
-        var toDoToDelete = await context.TodoItems.FirstOrDefaultAsync(todoItem => todoItem.Id == request.Id);
+        var toDoToDelete = await context.TodoItems.FirstOrDefaultAsync(todoItem =>
+            todoItem.Id == request.Id
+        );
 
         if (toDoToDelete is null)
         {

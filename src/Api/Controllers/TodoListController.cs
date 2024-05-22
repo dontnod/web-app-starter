@@ -44,7 +44,10 @@ public class TodoListController(IMediator mediator) : ControllerBase
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType(typeof(TodoItem), StatusCodes.Status200OK)]
-    public async Task<ActionResult<TodoItem>> UpdateAsync(int id, [FromBody][Required] UpdateTodoItemCommand command)
+    public async Task<ActionResult<TodoItem>> UpdateAsync(
+        int id,
+        [FromBody] [Required] UpdateTodoItemCommand command
+    )
     {
         if (id != command.Id)
         {
@@ -59,7 +62,9 @@ public class TodoListController(IMediator mediator) : ControllerBase
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<TodoItem>> CreateAsync([FromBody][Required] CreateTodoItemCommand command)
+    public async Task<ActionResult<TodoItem>> CreateAsync(
+        [FromBody] [Required] CreateTodoItemCommand command
+    )
     {
         return (await mediator.Send(command)).ToActionResult(this);
     }

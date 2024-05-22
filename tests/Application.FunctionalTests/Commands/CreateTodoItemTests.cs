@@ -14,8 +14,10 @@ public class CreateTodoItemTests : BaseTestFixture
     {
         var command = new CreateTodoItemCommand() { Description = string.Empty };
 
-        await FluentActions.Invoking(() =>
-            SendAsync(command)).Should().ThrowAsync<ValidationException>();
+        await FluentActions
+            .Invoking(() => SendAsync(command))
+            .Should()
+            .ThrowAsync<ValidationException>();
     }
 
     [Test]
@@ -23,10 +25,7 @@ public class CreateTodoItemTests : BaseTestFixture
     {
         var userId = await RunAsDefaultUserAsync();
 
-        var command = new CreateTodoItemCommand
-        {
-            Description = "Tasks",
-        };
+        var command = new CreateTodoItemCommand { Description = "Tasks", };
 
         Result<TodoItem> result = await SendAsync(command);
 

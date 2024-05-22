@@ -23,18 +23,23 @@ public class CustomWebApplicationFactory(DbConnection connection) : WebApplicati
         {
             services
                 .RemoveAll<ICurrentUser>()
-                 .AddTransient(provider => Mock.Of<ICurrentUser>(s =>
-                    s.GetId() == GetUserId() &&
-                    s.GetDisplayName() == GetDisplayName() &&
-                    s.IsApplication() == IsApplication()));
+                .AddTransient(provider =>
+                    Mock.Of<ICurrentUser>(s =>
+                        s.GetId() == GetUserId()
+                        && s.GetDisplayName() == GetDisplayName()
+                        && s.IsApplication() == IsApplication()
+                    )
+                );
 
             services
                 .RemoveAll<DbContextOptions<ApplicationDbContext>>()
-                .AddDbContext<ApplicationDbContext>((sp, options) =>
-                {
-                    options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
-                    options.UseSqlite(connection);
-                });
+                .AddDbContext<ApplicationDbContext>(
+                    (sp, options) =>
+                    {
+                        options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+                        options.UseSqlite(connection);
+                    }
+                );
         });
     }
 }

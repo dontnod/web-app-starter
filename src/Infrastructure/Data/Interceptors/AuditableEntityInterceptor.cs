@@ -5,18 +5,24 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using WebAppStarter.Application.Common.Interfaces;
 using WebAppStarter.Domain.Common;
 
-public class AuditableEntityInterceptor(
-        ICurrentUser user,
-        TimeProvider dateTime) : SaveChangesInterceptor
+public class AuditableEntityInterceptor(ICurrentUser user, TimeProvider dateTime)
+    : SaveChangesInterceptor
 {
-    public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
+    public override InterceptionResult<int> SavingChanges(
+        DbContextEventData eventData,
+        InterceptionResult<int> result
+    )
     {
         UpdateEntities(eventData.Context);
 
         return base.SavingChanges(eventData, result);
     }
 
-    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = default
+    )
     {
         UpdateEntities(eventData.Context);
 
@@ -25,11 +31,15 @@ public class AuditableEntityInterceptor(
 
     public void UpdateEntities(DbContext? context)
     {
-        if (context == null) return;
+        if (context == null)
+            return;
 
         foreach (var entry in context.ChangeTracker.Entries<BaseAuditableEntity>())
         {
-            if (entry.State is EntityState.Added or EntityState.Modified || entry.HasChangedOwnedEntities())
+            if (
+                entry.State is EntityState.Added or EntityState.Modified
+                || entry.HasChangedOwnedEntities()
+            )
             {
                 var utcNow = dateTime.GetUtcNow();
                 if (entry.State == EntityState.Added)

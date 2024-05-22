@@ -6,12 +6,15 @@ using Microsoft.EntityFrameworkCore;
 using WebAppStarter.Application.Common.Interfaces;
 using WebAppStarter.Domain.Entities;
 
-public class GetTodoItemByIdQueryHandler(IApplicationDbContext context, ICurrentUser currentUser) : IRequestHandler<GetTodoItemByIdQuery, Result<TodoItem>>
+public class GetTodoItemByIdQueryHandler(IApplicationDbContext context, ICurrentUser currentUser)
+    : IRequestHandler<GetTodoItemByIdQuery, Result<TodoItem>>
 {
-    public async Task<Result<TodoItem>> Handle(GetTodoItemByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result<TodoItem>> Handle(
+        GetTodoItemByIdQuery request,
+        CancellationToken cancellationToken
+    )
     {
-        var todoItem = await context.TodoItems
-            .FirstOrDefaultAsync(td => td.Id == request.Id);
+        var todoItem = await context.TodoItems.FirstOrDefaultAsync(td => td.Id == request.Id);
 
         if (todoItem == null)
         {

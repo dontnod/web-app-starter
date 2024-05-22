@@ -16,15 +16,19 @@ public class WriteTodoPermissionFilter : PermissionFilter
     private const string RequiredScopesConfigurationKey = "AzureAD:Scopes:Write";
     private const string RequiredAppPermissionsConfigurationKey = "AzureAD:AppPermissions:Write";
 
-    public WriteTodoPermissionFilter(IConfiguration configuration, IOptions<ClaimSettings> claimSettings)
-        : base(configuration, claimSettings, RequiredScopesConfigurationKey, RequiredAppPermissionsConfigurationKey)
-    {
-    }
+    public WriteTodoPermissionFilter(
+        IConfiguration configuration,
+        IOptions<ClaimSettings> claimSettings
+    )
+        : base(
+            configuration,
+            claimSettings,
+            RequiredScopesConfigurationKey,
+            RequiredAppPermissionsConfigurationKey
+        ) { }
 }
 
-public class WriteTodoPermissionAttribute : TypeFilterAttribute<WriteTodoPermissionFilter>
-{
-}
+public class WriteTodoPermissionAttribute : TypeFilterAttribute<WriteTodoPermissionFilter> { }
 
 #pragma warning restore SA1649 // File name should match first type name
 #pragma warning restore SA1402 // File may only contain a single type

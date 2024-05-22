@@ -12,9 +12,24 @@ public class GlobalProducesResponseTypeConvention : IApplicationModelConvention
             foreach (var action in controller.Actions)
             {
                 // Add global response types
-                action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest));
-                action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ProblemDetails), StatusCodes.Status404NotFound));
-                action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ProblemDetails), StatusCodes.Status500InternalServerError));
+                action.Filters.Add(
+                    new ProducesResponseTypeAttribute(
+                        typeof(ValidationProblemDetails),
+                        StatusCodes.Status400BadRequest
+                    )
+                );
+                action.Filters.Add(
+                    new ProducesResponseTypeAttribute(
+                        typeof(ProblemDetails),
+                        StatusCodes.Status404NotFound
+                    )
+                );
+                action.Filters.Add(
+                    new ProducesResponseTypeAttribute(
+                        typeof(ProblemDetails),
+                        StatusCodes.Status500InternalServerError
+                    )
+                );
             }
         }
     }

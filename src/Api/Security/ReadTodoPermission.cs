@@ -16,15 +16,19 @@ public class ReadTodoPermissionFilter : PermissionFilter
     private const string RequiredScopesConfigurationKey = "AzureAD:Scopes:Read";
     private const string RequiredAppPermissionsConfigurationKey = "AzureAD:AppPermissions:Read";
 
-    public ReadTodoPermissionFilter(IConfiguration configuration, IOptions<ClaimSettings> claimSettings)
-        : base(configuration, claimSettings, RequiredScopesConfigurationKey, RequiredAppPermissionsConfigurationKey)
-    {
-    }
+    public ReadTodoPermissionFilter(
+        IConfiguration configuration,
+        IOptions<ClaimSettings> claimSettings
+    )
+        : base(
+            configuration,
+            claimSettings,
+            RequiredScopesConfigurationKey,
+            RequiredAppPermissionsConfigurationKey
+        ) { }
 }
 
-public class ReadTodoPermissionAttribute : TypeFilterAttribute<ReadTodoPermissionFilter>
-{
-}
+public class ReadTodoPermissionAttribute : TypeFilterAttribute<ReadTodoPermissionFilter> { }
 
 #pragma warning restore SA1649 // File name should match first type name
 #pragma warning restore SA1402 // File may only contain a single type

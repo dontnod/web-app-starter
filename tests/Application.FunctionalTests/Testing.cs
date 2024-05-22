@@ -68,9 +68,7 @@ public partial class Testing
         {
             await database.ResetAsync();
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
 
         userId = null;
     }

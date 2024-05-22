@@ -23,10 +23,7 @@ public class DeleteTodoItemTests : BaseTestFixture
     {
         var userId = await RunAsDefaultUserAsync();
 
-        var result = await SendAsync(new CreateTodoItemCommand
-        {
-            Description = "New Item",
-        });
+        var result = await SendAsync(new CreateTodoItemCommand { Description = "New Item", });
 
         result.IsSuccess.Should().BeTrue();
 

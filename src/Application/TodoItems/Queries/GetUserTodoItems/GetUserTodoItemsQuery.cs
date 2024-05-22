@@ -4,6 +4,4 @@ using Ardalis.Result;
 using MediatR;
 using WebAppStarter.Domain.Entities;
 
-public record GetUserTodoItemsQuery : IRequest<Result<List<TodoItem>>>
-{
-}
+public record GetUserTodoItemsQuery : IRequest<Result<List<TodoItem>>> { }

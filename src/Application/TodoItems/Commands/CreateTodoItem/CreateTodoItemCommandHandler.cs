@@ -6,9 +6,13 @@ using WebAppStarter.Application.Common.Interfaces;
 using WebAppStarter.Domain.Entities;
 using WebAppStarter.Domain.Events;
 
-public class CreateTodoItemCommandHandler(IApplicationDbContext context, ICurrentUser currentUser) : IRequestHandler<CreateTodoItemCommand, Result<TodoItem>>
+public class CreateTodoItemCommandHandler(IApplicationDbContext context, ICurrentUser currentUser)
+    : IRequestHandler<CreateTodoItemCommand, Result<TodoItem>>
 {
-    public async Task<Result<TodoItem>> Handle(CreateTodoItemCommand request, CancellationToken cancellationToken)
+    public async Task<Result<TodoItem>> Handle(
+        CreateTodoItemCommand request,
+        CancellationToken cancellationToken
+    )
     {
         Guid? ownerIdOfTodo = currentUser.IsApplication() ? request.Owner : currentUser.GetId();
 
