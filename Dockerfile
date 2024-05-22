@@ -35,9 +35,7 @@ COPY ./ ./
 
 # Install Dot net Dependencies
 RUN dotnet restore
-RUN cd src/Api && dotnet tool restore
-
-RUN dotnet tool install --global dotnet-ef
+RUN dotnet tool restore
 
 ## ---------------------------------------------------------------------------------- ##
 ## ----------------------------------- prod build ----------------------------------- ##
