@@ -111,11 +111,11 @@ az ad app update --id $APP_ID --app-roles @roles.json
 ### Restore dependencies
 To install project dependencies, run the following command:
 ```sh
+# In the root folder
 # Restore the nuget packages
 dotnet restore
 
 # Restore the tools
-cd src/Api
 dotnet tool restore
 ```
 
@@ -136,7 +136,6 @@ dotnet user-secrets set "AzureAd:TenantId" "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbb" --
 ```sh
 dotnet run
 ```
-
 
 # Code Structure
 

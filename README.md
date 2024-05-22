@@ -24,6 +24,23 @@ For details on setting up and running the client, see the [Client documentation]
 ## Setup the API
 For details on setting up and running the service, see the [Service documentation](/src/Api/README.md)
 
+# Create new database migration
+```sh
+dotnet ef migrations add {MigrationName} -s src/Api -p src/Infrastructure -o Data/Migrations
+```
+
+# Apply migration to the database
+```sh
+dotnet ef database update -s src/Api -p src/Infrastructure 
+```
+
+# Format and lint
+```sh
+dotnet format style
+dotnet format analyzers
+dotnet csharpier .
+```
+
 # Docker
 Create a `.env` file at the root of the project and populate it with the following values to configure your environment:
 ```sh
