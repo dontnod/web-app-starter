@@ -21,6 +21,11 @@ public abstract class PermissionFilter(
 {
     public void OnAuthorization(AuthorizationFilterContext context)
     {
+        if (requiredScopesConfigurationKey == null)
+        {
+            context.Result = new ForbidResult(); // Use StatusCodeResult(403) if you prefer a simple 403 response
+            return;
+        }
         // Retrieve scopes and permissions from configuration
         var requiredScopes =
             requiredScopesConfigurationKey != null
@@ -37,9 +42,9 @@ public abstract class PermissionFilter(
         var hasValidScope =
             requiredScopes?.Any(scope =>
                 context.HttpContext.User.Claims.Any(c =>
-                    c.Type == claimSettings.Value.ScopeClaimType && c.Value.Contains(scope)
+                    c.Type == claimSettings.Value.ScopeClaimType && c.Value.Contains(scope) // <-- string.Contains??
                 )
-            ) ?? false;
+            ) ?? false; // Maybe early-out on requiredScopes == null?
 
         // TODO: replace claimSettings.Value.RoleClaimType with ClaimTypes....
         var hasValidPermission =

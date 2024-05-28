@@ -17,6 +17,7 @@ public class LoggingBehaviour<TRequest>(ILogger<TRequest> logger, ICurrentUser u
         var userId = user.GetId().ToString() ?? string.Empty;
         string userName = user.GetDisplayName() ?? string.Empty;
 
+        // Maybe a LogDebug/Trace?
         logger.LogInformation(
             "WebAppStarter Request: {Name} {@UserId} {@UserName} {@Request}",
             requestName,

@@ -20,7 +20,7 @@ public class CurrentUser : ICurrentUser
 
         if (user != null)
         {
-            userId = Guid.Parse(user.GetObjectId()!);
+            userId = Guid.Parse(user.GetObjectId()!); // How sure are we this can't be null? Seems not costly to check?
         }
 
         return userId;

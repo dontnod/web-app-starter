@@ -18,6 +18,7 @@ public class CreateTodoItemCommandHandler(IApplicationDbContext context, ICurren
 
         if (!ownerIdOfTodo.HasValue)
         {
+            // Error list?
             return Result.Error(new ErrorList(["Failed to determine id of the owner"], null));
         }
 
@@ -27,7 +28,7 @@ public class CreateTodoItemCommandHandler(IApplicationDbContext context, ICurren
             Description = request.Description,
         };
 
-        await context.TodoItems.AddAsync(entity);
+        await context.TodoItems.AddAsync(entity, cancellationToken);
 
         await context.SaveChangesAsync(cancellationToken);
 

@@ -14,11 +14,15 @@ public class GetUserTodoItemsQueryHandler(IApplicationDbContext context, ICurren
         CancellationToken cancellationToken
     )
     {
-        var todoItems = currentUser.IsApplication()
-            ? await context.TodoItems.ToListAsync()
-            : await context
-                .TodoItems.Where(todoItem => todoItem.Owner == currentUser.GetId())
-                .ToListAsync();
+        // Clearer without ternary IMHO
+        var query = context.TodoItems.AsQueryable();
+
+        if (!currentUser.IsApplication())
+        {
+            query = query.Where(todoItem => todoItem.Owner == currentUser.GetId());
+        }
+
+        var todoItems = await query.ToListAsync(cancellationToken);
 
         return Result.Success(todoItems);
     }

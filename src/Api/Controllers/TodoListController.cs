@@ -49,6 +49,7 @@ public class TodoListController(IMediator mediator) : ControllerBase
         [FromBody] [Required] UpdateTodoItemCommand command
     )
     {
+        // ? Should the ID be in the body if already in the request URI?
         if (id != command.Id)
         {
             return BadRequest();

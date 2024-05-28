@@ -64,7 +64,7 @@ jobs:
       with:
         name: dotnet-artifacts
         path: ./publish
-      
+
   build-client:
     needs: build-service
     runs-on: ubuntu-latest

@@ -6,5 +6,6 @@ public interface ICurrentUser
 
     string? GetDisplayName();
 
+    // What's that? -> src/Api/Services/CurrentUser.cs commented here, should be here too
     bool IsApplication();
 }

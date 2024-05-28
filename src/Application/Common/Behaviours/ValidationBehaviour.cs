@@ -27,6 +27,7 @@ public class ValidationBehaviour<TRequest, TResponse>(IEnumerable<IValidator<TRe
                 .SelectMany(r => r.Errors)
                 .ToList();
 
+            // Is the TODO ours? use TODO(identifier)
             // TODO: Maybe return a Result.Invalid instead of throwing an error
             if (failures.Any())
                 throw new ValidationException(failures);

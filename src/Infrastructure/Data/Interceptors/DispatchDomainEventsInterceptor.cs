@@ -35,14 +35,17 @@ public class DispatchDomainEventsInterceptor(IMediator mediator) : SaveChangesIn
 
         var entities = context
             .ChangeTracker.Entries<BaseEntity>()
-            .Where(e => e.Entity.DomainEvents.Any())
             .Select(e => e.Entity);
 
-        var domainEvents = entities.SelectMany(e => e.DomainEvents).ToList();
+        // too much linq is too much. I´d prefer we NEVER use Linq.ForEach
+        foreach (var e in entities)
+        {
+            foreach (var domainEvent in e.DomainEvents)
+            {
+                await mediator.Publish(domainEvent);
+            }
 
-        entities.ToList().ForEach(e => e.ClearDomainEvents());
-
-        foreach (var domainEvent in domainEvents)
-            await mediator.Publish(domainEvent);
+            e.ClearDomainEvents();
+        }
     }
 }
