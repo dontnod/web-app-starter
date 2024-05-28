@@ -42,13 +42,13 @@
 	// More info: https://containers.dev/implementors/json_reference/#port-attributes
 	"portsAttributes": {
 		"5197": {
-			"label": "Service http port forwading"
+			"label": "Service http port forwarding"
 		},
 		"7252": {
-			"label": "Service https port forwading"
+			"label": "Service https port forwarding"
 		},
 		"3002": {
-			"label": "Client port forwading"
+			"label": "Client port forwarding"
 		}
 	}
 	// "remoteUser": "root" 
